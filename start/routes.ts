@@ -19,10 +19,16 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import './hook'
 
-Route.get('/', async ({ view }) => {
-  return view.render('welcome')
+Route.group(() => {
+  Route.on('/').redirect('/login')
+  Route.get('login', 'Auth/AuthController.index').as('login')
+  Route.post('login', 'Auth/AuthController.login').as('login.check')
 })
 
-Route.get('/beranda','BerandasControler.index').as('beranda')
+Route.get('logout', 'Auth/AuthController.logout').as('logout')
+
+
+Route.get('/beranda','BerandasController.index').as('beranda')
 Route.get('/deskripsi', 'DeskripsisController.index').as('deskripsi')

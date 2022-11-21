@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partials/head')
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/chartist.css">
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/date-picker.css">
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/vector-map.css">
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      @include('partials/header')     
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+      
+        <!-- Page Sidebar Start-->
+        @!component('partials/nav', {
+          nama : "Said Jumadil Akbar"
+        })
+        <!-- Page Sidebar Ends-->
+
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+          <div class="container-fluid dashboard-default-sec">
+            <div class="col-sm-6">
+              <h3>Beranda</h3>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('beranda')}}">Beranda</a></li>
+              </ol>
+            </div>
+        
+            <div class="row">
+              <div class="col-sm-12 col-xl-12">
+                <div class="card">
+                  <div class="card-header bg-success d-flex justify-content-between align-items-center pb-0">
+                    <h5>SIM Praktikum</h5>   
+                  </div>
+                  <div class="card-body bg-success">
+                    <p class="mb-0">Web ini adalah aplikasi yang membantu civitas akademik dalam melakukan absensi/presensi pada proses praktikum secara online. Pengguna hanya perlu melakukan absen dengan meng-klik “ABSEN” pada praktikum yang dijalankan dan proses absensi akan selesai. Aplikasi ini juga memberikan informasi terkait dengan jadwal sehingga civitas juga bisa melihat list praktikum pada hari lainnya.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+          <!-- Container-fluid Ends-->
+        </div>
+
+        <!-- footer start-->
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- latest jquery-->
+    @include('partials/script')
+    <!-- Plugins JS start-->
+    <!-- Plugins JS Ends-->
+    <!-- Plugin used-->
+  </body>
+</html>
