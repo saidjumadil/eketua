@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partials/head')
+    <!-- Plugins css start-->
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      @include('partials/header')     
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+      
+        <!-- Page Sidebar Start-->
+        @!component('partials/nav', {
+          nama : "Said Jumadil Akbar"
+        })
+        <!-- Page Sidebar Ends-->
+        
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+          {{--  @!component('partials/slide', {})  --}}
+          
+          <div class="container-fluid dashboard-default-sec">
+            <div class="col-sm-6">
+              <h3>Tambah Kegiatan Ketua</h3>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('beranda')}}">E-Kinerja Ketua </a> / <a href="{{route('kegiatan.index')}}">Kegiatan / </a> <a href="{{route('kegiatan.add')}}">Tambah</a></li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-header pb-0">
+                <div class="header-top">
+                  <div class="col col-sm-6">
+                    <h5>Form Tambah Kegiatan Ketua</h5>                                            
+                  </div>
+              </div>
+              </div>
+              <div class="card-body pr-3 chart-block">
+                <form method="post">
+                  <div class="mb-3">
+                    <label class="form-label" for="jenis">Jenis Kegiatan</label>
+                    <select class="form-select" id="jenis" type="text" name="jenis" required="">
+                      @each(item in jenis)
+                        <option value="{{item.id}}-{{item.jenis}}">{{item.jenis}}</option>
+                      @endeach
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="judul">Judul Kegiatan</label>
+                    <input class="form-control digits" type="text" name="judul" id="judul" placeholder="Judul Kegiatan" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="kegiatan">Isi Kegiatan</label>
+                    <textarea class="form-control" name="kegiatan" id="kegiatan" rows="3" placeholder="Hasil dan Catatan Penting"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="tanggal">Tanggal Kegiatan</label>
+                    <input class="form-control digits" type="date" name="tanggal" id="tanggal">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="provinsi">Lokasi Kegiatan</label>
+                    <select class="form-select digits" name="provinsi" id="provinsi">
+                      <option value=""> -- Provinsi -- </option>
+                    </select>
+                    <div class="row my-3">
+                      <div class="col col-6">
+                        <select class="form-select digits" name="kota" id="kota">
+                          <option value=""> -- Kota / Kabupaten -- </option>
+                        </select>
+                      </div>
+                      <div class="col col-6">
+                        <select class="form-select digits" name="kecamatan" id="kecamatan">
+                          <option value=""> Kecamatan </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <textarea class="form-control" name="alamat" id="alamat" rows="2" placeholder="Alamat Rinci Kegiatan"></textarea>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="input_link">Link Berita Kegiatan</label>
+                    <input class="form-control" type="text" aria-label="file example" name="link[]" id="input_link">
+                    <p>*Tekan Spasi untuk menambahkan link berita</p>
+                    <div id="list">
+                    </div>
+                  </div>
+                  <div class="mb-3 d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit">Tambah</button>
+                  </div>
+                </form>
+              </div> 
+            </div>
+          </div>  
+          <!-- Container-fluid Ends-->
+        </div>
+
+        <!-- footer start-->
+        
+      </div>
+    </div>
+    <script>
+      const link = document.querySelector('#link')
+      const input_link = document.querySelector('#input_link')
+      const list = document.querySelector('#list')
+      const provinsi = document.querySelector('#provinsi')
+      const kota = document.querySelector('#kota')
+      const kecamatan = document.querySelector('#kecamatan')
+
+      provinsiSet()
+      
+      input_link.addEventListener('keypress', (res) => {
+        if(res.key === ' ' || res.key === 'Enter'){
+          console.log('Masok')
+          list.innerHTML += `
+          <div id="item_list" class="row mt-2">
+            <input type="hidden" id="link[]" name="link[]" value="${input_link.value}">
+            <a class="col col-9 mr-1" rel="stylesheet" href="${input_link.value}" target="_blank">${input_link.value}</a>
+            <div class="col col-2">
+              <button type="button" id="delete" class="btn btn-danger btn-xs"><span class="icon-close"></span></button>
+            </div>
+          </div>
+          `
+          input_link.value = ''
+          deleteList()
+        }
+      })
+      
+      //Delete Link
+      deleteList()
+      function deleteList(){
+        const item_list = document.querySelectorAll('#item_list')
+        const hapus = document.querySelectorAll('#delete')
+
+        hapus.forEach(i => i.addEventListener('click', () => {
+            console.log('hapus')
+            item_list[index].remove()
+          }))
+      }
+    
+      //API Provinsi
+      function provinsiSet(){
+        const api_provinsi = `{{route('api.provinsi')}}`
+
+        fetch(api_provinsi)
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            for (let item of data) {
+              provinsi.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
+            }
+          })
+      }
+
+      //API Kota Kabupaten
+      provinsi.addEventListener('change', res => {
+        console.log(`Provinsi ${res.target.value}`)
+        const target = res.target.value.split('-')
+        kotaSet(target[0])
+      })
+
+      function kotaSet(id){
+        const api_kota = `{{route('api.kota')}}`
+
+        fetch(`${api_kota}?id=${id}`)
+          .then(res => res.json())
+          .then(data => {
+            kota.innerHTML = '<option value=""> -- Kota / Kabupaten -- </option>'
+            console.log(data)
+            for (let item of data) {
+              kota.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
+            }
+          })
+      }
+
+      //API Kecamatan
+      kota.addEventListener('change', res => {
+        console.log(`Kota / Kabupaten ${res.target.value}`)
+        const target = res.target.value.split('-')
+        kecamatanSet(target[0])
+      })
+
+      function kecamatanSet(id){
+        const api_kecamatan = `{{route('api.kecamatan')}}`
+        
+        fetch(`${api_kecamatan}?id=${id}`)
+          .then(res => res.json())
+          .then(data => {
+            kecamatan.innerHTML = '<option value=""> -- Kecamatan -- </option>'
+            console.log(data)
+            for (let item of data) {
+              kecamatan.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
+            }
+          })
+      }
+    </script>
+    <!-- latest jquery-->
+    @include('partials/script')
+    <!-- Plugins JS start-->
+    <!-- Plugins JS Ends-->
+
+    <!-- Plugin used-->
+  </body>
+</html>

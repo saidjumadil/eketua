@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partials/head')
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/photoswipe.css">
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      @include('partials/header')     
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+      
+        <!-- Page Sidebar Start-->
+        @!component('partials/nav', {
+          nama : "Said Jumadil Akbar"
+        })
+        <!-- Page Sidebar Ends-->
+        
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+          
+          <div class="container-fluid dashboard-default-sec">
+            <div class="blog-single">
+              <div class="blog-box blog-details">
+                <div class="banner-wrraper" style="height: 150px"><img class="img-fluid w-100 bg-img-cover" src="{{appUrl()}}/assets/images/bg-depan.jpg" alt="blog-main"></div>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="blog-details">
+                      <ul class="blog-social">
+                        <li><i class="icofont icofont-calendar"></i>{{date(new Date())}}</li>
+                        <li><i class="icofont icofont-social-google-map"></i>Gedung DPRK Banda Aceh - <span>Banda Aceh </span></li>
+                      </ul>
+                      <h4>
+                        Apa Itu E-KINERJA KETUA?
+                      </h4>
+                      <div class="single-blog-content-top">
+                        <p style="text-align: justify;">APLIKASI E-KETUA/E-SCHEDULE ADALAH APLIKASI BERBASIS WEBSITE YANG BISA DIAKSES MELALUI PC DAN SMARTPHONE</p>
+                        <p style="text-align: justify;">APLIKASI INI BERISIKAN AGENDA-AGENDA KETUA DPRK BANDA ACEH YANG BERTUJUAN UNTUK MEMUDAHKAN DALAM MELAKUKAN REKAPITULASI DAN ANALISIS KEGIATAN-KEGIATAN KETUA DPRK BANDA ACEH DALAM RENTANG WAKTU TERTENTU</p>
+                        <p style="text-align: justify;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+          
+          <!-- Container-fluid Ends-->
+        </div>
+
+        <!-- footer start-->
+        
+      </div>
+    </div>
+    <!-- latest jquery-->
+    @include('partials/script')
+    <!-- Plugins JS start-->
+    <script src="{{appUrl()}}/assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/counter/counter-custom.js"></script>
+    <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe.js"></script>
+    <script src="{{appUrl()}}/assets/js/chart/apex-chart/apex-chart.js"></script>
+    <script src="{{appUrl()}}/assets/js/chart/apex-chart/stock-prices.js"></script>
+    <script src="{{appUrl()}}/assets/js/chart/apex-chart/chart-custom.js"></script>
+    <!-- Plugins JS Ends-->
+    
+    <!-- Plugin used-->
+  </body>
+</html>

@@ -7,8 +7,7 @@
   padding: 10px;
   position: relative;
   border: 1px solid #e6edef;
-  overflow: auto;
-  height: 300px; }
+  overflow: auto; }
   .scroll-demo .horz-scroll-content {
     width: 1600px; }
 

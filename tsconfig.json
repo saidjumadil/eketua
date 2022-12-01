@@ -2,7 +2,7 @@
   "extends": "adonis-preset-ts/tsconfig.json",
   "include": [
     "**/*"
-  ],
+, "public/assets/js/photoswipe/photoswipe.min.js", "public/assets/js/photoswipe/photoswipe-ui-default.min.js"  ],
   "exclude": [
     "node_modules",
     "build"

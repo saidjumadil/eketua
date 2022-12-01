@@ -1,0 +1,26 @@
+<div class="col col-sm-6">
+    <div class="card">
+        <div class="card-body" style="border-left:6px solid #{{warna}}">
+          <div class="row d-flex align-items-center">
+            <div class="col-3 d-flex flex-column justify-content-center">
+              <div>
+                <h2>{{tanggal}}</h2>
+                <h5>{{hari}}</h5>
+              </div>
+            </div>
+            <div class="col-9">
+              <div>
+                <h4>{{judul}}</h4>
+                <p class="mb-0" style="color: #{{warna}}"><span class="fa fa-calendar-o"></span>     {{jenis}}</p>
+                <p><span class="fa fa-map-marker"></span>    {{lokasi}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer p-2" style="border-left:6px solid #{{warna}}">
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-sm" href=" {{route('kegiatan.rincian', {id : `${id}`})}} " data-bs-original-title="" title="" style="color:#{{warna}}">Selengkapnya</a>
+            </div>
+        </div>
+    </div>
+</div>

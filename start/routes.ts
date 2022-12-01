@@ -32,3 +32,18 @@ Route.get('logout', 'Auth/AuthController.logout').as('logout')
 
 Route.get('/beranda','BerandasController.index').as('beranda')
 Route.get('/deskripsi', 'DeskripsisController.index').as('deskripsi')
+
+Route.group(() => {
+  Route.get('/', 'KegiatansController.index').as('index')
+  Route.get('/by-month/:bulan/:tahun', 'KegiatansController.perBulan').as('perBulan')
+  Route.get('/rincian/:id', 'KegiatansController.rincian').as('rincian')
+  Route.get('/add', 'KegiatansController.add').as('add')
+  Route.post('/add', 'KegiatansController.post').as('post')
+}).prefix('kegiatan').as('kegiatan')
+
+Route.group(() => {
+  Route.get('provinsi', 'ApiController.provinsi').as('provinsi')
+  Route.get('kota', 'ApiController.kota').as('kota')
+  Route.get('kecamatan', 'ApiController.kecamatan').as('kecamatan')
+  Route.get('kegiatan', 'ApiController.kegiatan').as('kegiatan')
+}).as('api').prefix('api')

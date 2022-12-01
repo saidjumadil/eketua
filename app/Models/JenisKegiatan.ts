@@ -1,9 +1,15 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Jadwal extends BaseModel {
+export default class JenisKegiatan extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+  public jenis: string
+
+  @column()
+  public warna: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

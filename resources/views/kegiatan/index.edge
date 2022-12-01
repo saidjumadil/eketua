@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partials/head')
+    <!-- Plugins css start-->
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      @include('partials/header')     
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+      
+        <!-- Page Sidebar Start-->
+        @!component('partials/nav', {
+          nama : "Said Jumadil Akbar"
+        })
+        <!-- Page Sidebar Ends-->
+        
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+          {{--  @!component('partials/slide', {})  --}}
+          
+          <div class="container-fluid dashboard-default-sec">
+            <div class="col-sm-6">
+              <h3>List Kegiatan Ketua</h3>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('beranda')}}">E-Kinerja Ketua </a> / <a href="{{route('kegiatan.index')}}">Kegiatan / </a></li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-header pb-0">
+                <div class="header-top">
+                  <div class="row">
+                    <div class="col col-sm-6">
+                      <h5>List Kegiatan Ketua</h5>                                            
+                    </div>
+                    <div class="col col-sm-6 text-end">
+                      <a href="{{route('kegiatan.add')}}" class="btn btn-success btn-sm" > <span class="fa fa-plus"></span> Tambah</a>
+                    </div>
+                  </div>
+              </div>
+              </div>
+              <div class="card-body pr-3 chart-block">
+                <div class="row mb-3" id="tanggal">
+                  <div class="col col-sm-6">
+                    @set('tahun', new Date().getFullYear())
+                    <select class="form-select" name="tahun" id="tahun">
+                      <option value="{{tahun}}">{{tahun}}</option>
+                      <option value="{{tahun-1}}">{{tahun-1}}</option>
+                      <option value="{{tahun-2}}">{{tahun-2}}</option>
+                    </select>
+                  </div>
+                  <div class="col col-sm-6">
+                    <select class="form-select" name="bulan" id="bulan">
+                      @each((item, index) in bulan_array)
+                        @if(index == new Date().getMonth())
+                          <option value="{{index}}" selected>{{item}}</option>
+                        @else
+                          <option value="{{index}}">{{item}}</option>
+                        @endif
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+                <div class="row" id="list">
+                  @each(item in kegiatan)
+                    @!component('component/kegiatan', {
+                      id: item.id,
+                      tanggal : item.tanggal.getDate(),
+                      hari : hari(item.tanggal.getDay()),
+                      judul : item.judul,
+                      jenis : item.jenis,
+                      lokasi : `${item.kecamatan} | ${item.alamat}`,
+                      warna : item.warna
+                    })  
+                  @endeach
+                  @!component('component/kegiatan', {
+                    id: 1,
+                    tanggal : "22",
+                    hari : "Rab",
+                    judul : "Kegiatan Amal Anak Yatim Piatu",
+                    jenis : "Kegiatan Lainnya",
+                    lokasi : "Gampong Lamkuku",
+                    warna : "C0E218"
+                  })
+                  @!component('component/kegiatan', {
+                    id:2,
+                    tanggal : "25",
+                    hari : "Rab",
+                    judul : "Kegiatan Bantuan Kampung Kuta Langka",
+                    jenis : "Kegiatan Lainnya",
+                    lokasi : "Gampong Kuta Langka",
+                    warna : "C0E218"
+                  })
+                  @!component('component/kegiatan', {
+                    id:3,
+                    tanggal : "26",
+                    hari : "Rab",
+                    judul : "Kunjungan Kerja DPRK Banda Aceh ke Jakarta",
+                    jenis : "Dinas Luar",
+                    lokasi : "Gampong Kuta Langka",
+                    warna : "111D5E"
+                  })
+                </div>
+              </div> 
+            </div>
+          </div>  
+          
+          <!-- Container-fluid Ends-->
+        </div>
+
+        <!-- footer start-->
+        
+      </div>
+    </div>
+    <script>
+      const list = document.querySelector('#list')
+      const bulan = document.querySelector('#bulan')
+      const tahun = document.querySelector('#tahun')
+      const tanggal = document.querySelector('#tanggal')
+      const api = `{{route('api.kegiatan')}}`
+      const link = `{{route('kegiatan.rincian', {id : 'id_kegiatan'})}}`
+      const hari = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']
+
+      tanggal.addEventListener('change', () => {
+        console.log(bulan.value, tahun.value)
+        cari(bulan.value, tahun.value)
+      })
+
+      function cari(bulan, tahun){
+        fetch(`${api}?bulan=${bulan}&&tahun=${tahun}`)
+         .then(res => res.json())
+         .then(data => {
+            list.innerHTML = ''
+            for(let item of data){
+              list.innerHTML += `
+              <div class="col col-sm-6">
+                <div class="card">
+                    <div class="card-body" style="border-left:6px solid #${item.warna}">
+                      <div class="row d-flex align-items-center">
+                        <div class="col-3 d-flex flex-column justify-content-center">
+                          <div>
+                            <h2>${new Date(item.tanggal).getDate()}</h2>
+                            <h5>${hari[new Date(item.tanggal).getDay()]}</h5>
+                          </div>
+                        </div>
+                        <div class="col-9">
+                          <div>
+                            <h4>${item.judul}</h4>
+                            <p class="mb-0" style="color: #${item.warna}"><span class="fa fa-calendar-o"></span>     ${item.jenis}</p>
+                            <p><span class="fa fa-map-marker"></span>    ${item.kecamatan} | ${item.alamat}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer p-2" style="border-left:6px solid #${item.warna}">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-sm" href="${link.replace('id_kegiatan', item.id)}" data-bs-original-title="" title="" style="color:#${item.warna}">Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              `
+            }
+         })
+      }
+      
+    </script>
+    <!-- latest jquery-->
+    @include('partials/script')
+    <!-- Plugins JS start-->
+    <!-- Plugins JS Ends-->
+    <!-- Plugin used-->
+  </body>
+</html>

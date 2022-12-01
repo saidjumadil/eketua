@@ -1,0 +1,14 @@
+<div class="col col-2 col-sm-2 col-xl-2 box-col-4 des-xl-50">
+    <div class="card border-0">
+      <div class="blog-box blog-grid">
+        <div class="blog-wrraper"><a href="{{route('kegiatan.rincian', {'id':`${id}`})}}"><img class="img-fluid top-radius-blog" src="{{appUrl()}}/assets/images/bg-depan.jpg" alt=""></a></div>
+        <div class="blog-details-second border">
+          <div class="blog-post-date"></div>
+          <a href="{{route('kegiatan.rincian', {'id':`${id}`})}}">
+            <h6 class="blog-bottom-details mt-5">{{judul}}</h6>
+          </a>
+          <p>{{ringkasan}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
