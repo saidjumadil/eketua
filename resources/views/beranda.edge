@@ -50,7 +50,7 @@
                           <h5>Kegiatan</h5>                                            
                         </div>
                         <div class="col col-sm-6 text-end">
-                          <a href="#" class="btn btn-primary btn-sm" > <span class="fa fa-plus"></span> Tambah</a>
+                        <a class="btn btn-primary btn-sm" href="{{route('kegiatan.add')}} " data-bs-original-title="" title=""> <span class="fa fa-plus"></span> Tambah</a>
                         </div>
                       </div>
                     </div>
@@ -60,6 +60,11 @@
                      <div class="p-0 mr-3" id="chart-yearly-growth-dash-2">
                      </div>
                      <div class="row px-4 d-flex justify-content-center" id="legend">
+                      @each(item in jenis)
+                        <div class="col px-1 mb-2 d-flex justify-content-center">
+                          <a class="badge badge-primary" style="background-color : #{{item.warna}}; width : 100%" href="#">{{item.jenis}}</a>
+                        </div>
+                      @endeach
                      </div>
                   </div> 
                 </div>
@@ -74,7 +79,7 @@
                         <h5>Informasi</h5>
                       </div>
                       <div class="col col-6 d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary btn-sm">Lihat Semua</button>
+                        <a class="btn btn-primary btn-sm" href="{{route('kegiatan.index')}} " data-bs-original-title="" title="">Lihat Semua</a>
                       </div>
                     </div>
                   </div>
@@ -86,13 +91,17 @@
                             @!component('component/beranda/kegiatan', {
                               id_kegiatan : 0,
                               judul: "Apa Itu E-KINERJA KETUA?",
-                              ringkasan: "APLIKASI E-KETUA/E-SCHEDULE ADALAH APLIKASI BERBASIS WEBSITE YANG BISA DIAKSES MELALUI PC DAN SMARTPHONE"
+                              ringkasan: "APLIKASI E-KETUA/E-SCHEDULE ADALAH APLIKASI BERBASIS WEBSITE YANG BISA DIAKSES MELALUI PC DAN SMARTPHONE",
+                              gambar: `${appUrl()}/assets/images/banner.jpg`
                             })
-                            @!component('component/beranda/kegiatan')
-                            @!component('component/beranda/kegiatan')
-                            @!component('component/beranda/kegiatan')
-                            @!component('component/beranda/kegiatan')
-                            @!component('component/beranda/kegiatan')
+                            @each(item in kegiatan)
+                              @!component('component/beranda/kegiatan', {
+                                id_kegiatan : item.id,
+                                judul: item.judul,
+                                ringkasan: `${item.deskripsi.slice(0,50)}...`,
+                                gambar: item.gambar ? appUrl(`uploads/images/${item.id}/${item.gambar.split(',')[0]}`) : `${appUrl()}/assets/images/banner.jpg`
+                              })
+                            @endeach
                           </div>
                         </div>
                       </div>
@@ -127,70 +136,32 @@
     <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
     <!-- Plugins JS Ends-->
     <script>
-      chart("Oke")
+      let warna = []
+      const api = `{{route('api.chart')}}`
+      fetch(api)
+        .then( res => res.json())
+        .then(data => {
+          console.log(data)
+          data.jenis.forEach(e => {
+            e.y = Math.random() * 100
+          })
+          chart(data.jenis)
+        })
       function chart(isi){
-        var colors = ['#111D5E', '#C70039', '#C0E218', '#F37121', '#FCE700', '#00F5FF', '#EA047E', '#184D47', '#C15050']
-        const legend = document.querySelector('#legend')
-        for(let item of colors){
-          legend.innerHTML += `
-          <div class="col col-2 px-1 mb-2 d-flex justify-content-center">
-            <a class="badge badge-primary" style="background-color : ${item}; width : 100%" href="#">label</a>
-          </div>
-          `
-        }
+        // var colors = ['#111D5E', '#C70039', '#C0E218', '#F37121', '#FCE700', '#00F5FF', '#EA047E', '#184D47', '#C15050']
+        // const legend = document.querySelector('#legend')
+        // for(let item of colors){
+        //   legend.innerHTML += `
+        //   <div class="col col-2 px-1 mb-2 d-flex justify-content-center">
+        //     <a class="badge badge-primary" style="background-color : ${item}; width : 100%" href="#">label</a>
+        //   </div>
+        //   `
+        // }
         var options51 = {
           series: [
             {
               name: "Pendapatan ",
-              data: [
-                {
-                  x: "2001",
-                  y: 5500,
-                  fillColor: colors[0]
-                },
-                {
-                  x: "2002",
-                  y: 3800,
-                  fillColor: colors[1]
-                },
-                {
-                  x: "2003",
-                  y: 5500,
-                  fillColor: colors[2]
-                  
-                },
-                {
-                  x: "2004",
-                  y: 7700,
-                  fillColor: colors[3]
-                },
-                {
-                  x: "2005",
-                  y: 1500,
-                  fillColor: colors[4]
-                  
-                },
-                {
-                  x: "2006",
-                  y: 1000,
-                  fillColor: colors[5]
-                },
-                {
-                  x: "2007",
-                  y: 5000,
-                  fillColor: colors[6]
-                },
-                {
-                  x: "2008",
-                  y: 6000,
-                  fillColor: colors[7]
-                },
-                {
-                  x: "2009",
-                  y: 7900,
-                  fillColor: colors[8]
-                }
-              ]
+              data: isi
             }
           ],
           chart: {
@@ -207,7 +178,7 @@
             }
           },
           stroke: {
-            show: false,
+            show: true,
           },
           dataLabels: {
             enabled: false
@@ -230,7 +201,7 @@
           yaxis: {
             labels: {
               formatter: function (val) {
-                return val / 1000 + "K";
+                return val;
               },
             }
           },

@@ -38,6 +38,9 @@ Route.group(() => {
   Route.get('/by-month/:bulan/:tahun', 'KegiatansController.perBulan').as('perBulan')
   Route.get('/rincian/:id', 'KegiatansController.rincian').as('rincian')
   Route.get('/add', 'KegiatansController.add').as('add')
+  Route.get('/edit/:id', 'KegiatansController.edit').as('edit')
+  Route.post('/edit/:id', 'KegiatansController.edit_post').as('edit_post')
+  Route.get('/hapus/:id', 'KegiatansController.hapus').as('hapus')
   Route.post('/add', 'KegiatansController.post').as('post')
 }).prefix('kegiatan').as('kegiatan')
 
@@ -46,4 +49,7 @@ Route.group(() => {
   Route.get('kota', 'ApiController.kota').as('kota')
   Route.get('kecamatan', 'ApiController.kecamatan').as('kecamatan')
   Route.get('kegiatan', 'ApiController.kegiatan').as('kegiatan')
+  Route.post('gambar', 'ApiController.gambar').as('gambar')
+  Route.get('chart', 'ApiController.chart').as('chart')
+  Route.get('delete-gambar', 'ApiController.delete_gambar').as('delete_gambar')
 }).as('api').prefix('api')

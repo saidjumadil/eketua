@@ -49,25 +49,30 @@
               </div>
               <div class="card-body pr-3 chart-block">
                 <form method="post">
+                  <input type="hidden" name="id" id="id" value="{{kegiatan.id}}">
                   <div class="mb-3">
                     <label class="form-label" for="jenis">Jenis Kegiatan</label>
                     <select class="form-select" id="jenis" type="text" name="jenis" required="">
                       @each(item in jenis)
+                      @if(item.id == kegiatan.id_kegiatan)
+                        <option value="{{item.id}}-{{item.jenis}}" selected>{{item.jenis}}</option> 
+                      @else
                         <option value="{{item.id}}-{{item.jenis}}">{{item.jenis}}</option>
+                      @endif
                       @endeach
                     </select>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="judul">Judul Kegiatan</label>
-                    <input class="form-control digits" type="text" name="judul" id="judul" placeholder="Judul Kegiatan" required>
+                    <input class="form-control digits" type="text" name="judul" id="judul" placeholder="Judul Kegiatan" value="{{kegiatan.judul}}" required>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="kegiatan">Isi Kegiatan</label>
-                    <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting"></textarea>
+                    <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting">{{kegiatan.deskripsi}}</textarea>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="tanggal">Tanggal Kegiatan</label>
-                    <input class="form-control digits" type="date" name="tanggal" id="tanggal">
+                    <input class="form-control digits" type="date" name="tanggal" id="tanggal" value={{tanggal(kegiatan.tanggal)}}>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="provinsi">Lokasi Kegiatan</label>
@@ -87,7 +92,7 @@
                       </div>
                     </div>
                     <div>
-                      <textarea class="form-control" name="alamat" id="alamat" rows="2" placeholder="Alamat Rinci Kegiatan"></textarea>
+                      <textarea class="form-control" name="alamat" id="alamat" rows="2" placeholder="Alamat Rinci Kegiatan">{{kegiatan.alamat}}</textarea>
                     </div>
                   </div>
                   <div class="mb-3">
@@ -95,6 +100,17 @@
                     <input class="form-control" type="text" aria-label="file example" name="link[]" id="input_link">
                     <p>*Tekan Spasi untuk menambahkan link berita</p>
                     <div id="list">
+                      @each(item in kegiatan.link.split(','))
+                        @if(item != '')
+                          <div id="item_list" class="row mt-2">
+                            <input type="hidden" id="link[]" name="link[]" value="{{item}}">
+                            <a class="col col-9 mr-1" rel="stylesheet" href="{{item}}" target="_blank">{{item}}</a>
+                            <div class="col col-2">
+                              <button type="button" id="delete" class="btn btn-danger btn-xs"><span class="icon-close"></span></button>
+                            </div>
+                          </div>
+                        @endif
+                      @endeach
                     </div>
                   </div>
                   <div class="mb-3 d-flex justify-content-end">
@@ -118,8 +134,14 @@
       const provinsi = document.querySelector('#provinsi')
       const kota = document.querySelector('#kota')
       const kecamatan = document.querySelector('#kecamatan')
-
+      const value_provinsi = `{{kegiatan.id_provinsi}}`
+      const value_kota = `{{kegiatan.id_kota}}`
+      const value_kecamatan = `{{kegiatan.id_kecamatan}}`
+      
       provinsiSet()
+      kotaSet(value_provinsi, true)
+      kecamatanSet(value_kota, true)
+      
       
       input_link.addEventListener('keypress', (res) => {
         if(res.key === ' ' || res.key === 'Enter'){
@@ -137,6 +159,10 @@
           deleteList()
         }
       })
+
+      //Set daerah
+      function setDaerah(){
+      }
       
       //Delete Link
       deleteList()
@@ -145,7 +171,6 @@
         const hapus = document.querySelectorAll('#delete')
 
         hapus.forEach(i => i.addEventListener('click', () => {
-            console.log('hapus')
             item_list[index].remove()
           }))
       }
@@ -157,9 +182,12 @@
         fetch(api_provinsi)
           .then(res => res.json())
           .then(data => {
-            console.log(data)
             for (let item of data) {
-              provinsi.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
+              if (item.id == value_provinsi) {
+                provinsi.innerHTML += `<option value="${item.id}-${item.nama}" selected> ${item.nama} </option>`
+              } else {
+                provinsi.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
+              }
             }
           })
       }
@@ -168,19 +196,21 @@
       provinsi.addEventListener('change', res => {
         console.log(`Provinsi ${res.target.value}`)
         const target = res.target.value.split('-')
-        kotaSet(target[0])
+        kotaSet(target[0], false)
       })
 
-      function kotaSet(id){
+      function kotaSet(id, status){
         const api_kota = `{{route('api.kota')}}`
 
         fetch(`${api_kota}?id=${id}`)
           .then(res => res.json())
           .then(data => {
             kota.innerHTML = '<option value=""> -- Kota / Kabupaten -- </option>'
-            console.log(data)
             for (let item of data) {
               kota.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
+            }
+            if (status) {
+              kota.value = `{{kegiatan.id_kota}}-{{kegiatan.kota}}`
             }
           })
       }
@@ -189,22 +219,25 @@
       kota.addEventListener('change', res => {
         console.log(`Kota / Kabupaten ${res.target.value}`)
         const target = res.target.value.split('-')
-        kecamatanSet(target[0])
+        kecamatanSet(target[0], false)
       })
 
-      function kecamatanSet(id){
+      function kecamatanSet(id, status){
         const api_kecamatan = `{{route('api.kecamatan')}}`
         
         fetch(`${api_kecamatan}?id=${id}`)
           .then(res => res.json())
           .then(data => {
             kecamatan.innerHTML = '<option value=""> -- Kecamatan -- </option>'
-            console.log(data)
             for (let item of data) {
               kecamatan.innerHTML += `<option value="${item.id}-${item.nama}"> ${item.nama} </option>`
             }
+            if (status) {
+              kecamatan.value = `{{kegiatan.id_kecamatan}}-{{kegiatan.kecamatan}}`
+            }
           })
       }
+      setDaerah()
     </script>
     <!-- latest jquery-->
     @include('partials/script')

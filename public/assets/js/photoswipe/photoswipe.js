@@ -41,6 +41,8 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             if(linkEl.children.length > 0) {
                 // <img> thumbnail element, retrieving thumbnail url
                 item.msrc = linkEl.children[0].getAttribute('src');
+                // console.log(linkEl.children[0].getAttribute('src'));
+
             }
 
             item.el = figureEl; // save link to element for getThumbBoundsFn

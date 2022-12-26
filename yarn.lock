@@ -829,6 +829,11 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-18.11.9.tgz"
   "version" "18.11.9"
 
+"@types/photoswipe@^4.1.2":
+  "integrity" "sha512-HA9TtCAQKToldgxRiyJ1DbsElg/cQV/SQ8COVjqIqghjy60Zxfh78E1WiFotthquqkS86nz13Za9wEbToe0svQ=="
+  "resolved" "https://registry.npmjs.org/@types/photoswipe/-/photoswipe-4.1.2.tgz"
+  "version" "4.1.2"
+
 "@types/pino-pretty@*":
   "integrity" "sha512-N1uzqSzioqz8R3AkDbSJwcfDWeI3YMPNapSQQhnB2ISU4NYgUIcAh+hYT5ygqBM+klX4htpEhXMmoJv3J7GrdA=="
   "resolved" "https://registry.npmjs.org/@types/pino-pretty/-/pino-pretty-5.0.0.tgz"
@@ -4060,6 +4065,11 @@
   "integrity" "sha512-r5o/V/ORTA6TmUnyWZR9nCj1klXCO2CEKNRlVuJptZe85QuhFayC7WeMic7ndayT5IRIR0S0xFxFi2ousartlQ=="
   "resolved" "https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-2.5.0.tgz"
   "version" "2.5.0"
+
+"photoswipe@^5.3.4":
+  "integrity" "sha512-SN+RWHqxJvdwzXJsh8KrG+ajjPpdTX5HpKglEd0k9o6o5fW+QHPkW8//Bo11MB+NQwTa/hFw8BDv2EdxiDXjNw=="
+  "resolved" "https://registry.npmjs.org/photoswipe/-/photoswipe-5.3.4.tgz"
+  "version" "5.3.4"
 
 "picomatch@^2.0.4", "picomatch@^2.2.1", "picomatch@^2.3.1":
   "integrity" "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="

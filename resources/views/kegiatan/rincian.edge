@@ -34,19 +34,19 @@
           <!-- Container-fluid starts-->
           {{--  @!component('partials/slide', {})  --}}
           <div class="container-fluid">
-            <div class="blog-single">
-              <div class="blog-box blog-details">
-                <div class="card">
-                  <div class="card-body" style="border-top:6px solid #{{kegiatan.warna}}">
-                    <div class="row mb-3">
-                      <div class="col col-3 d-flex align-items-center">
-                        <a href="{{route('kegiatan.index')}}"><i class="fa fa-angle-left"></i><span> Back</span></a>
-                      </div>
-                      <div class="col col-9 d-flex justify-content-end">
-                        <button type="button" class="btn btn-warning btn-sm me-2"> <span class="fa fa-edit"></span> Edit</button>
-                        <button type="button" class="btn btn-danger btn-sm"> <span class="fa fa-close"></span> Hapus</button>
-                      </div>
-                    </div>
+            <div class="card">
+              <div class="card-body" style="border-top:6px solid #{{kegiatan.warna}}">
+                <div class="row mb-3">
+                  <div class="col col-3 d-flex align-items-center">
+                    <a href="{{route('kegiatan.index')}}"><i class="fa fa-angle-left"></i><span> Back</span></a>
+                  </div>
+                  <div class="col col-9 d-flex justify-content-end">
+                    <a class="btn btn-warning btn-sm me-3" href="{{route('kegiatan.edit', {id : `${kegiatan.id}`})}} " data-bs-original-title="" title=""><span class="fa fa-edit"></span> Edit</a>
+                    <a class="btn btn-danger btn-sm" href="{{route('kegiatan.hapus', {id : `${kegiatan.id}`})}} " data-bs-original-title="" title=""><span class="fa fa-close"></span> Hapus</a>
+                  </div>
+                </div>
+                <div class="blog-single">
+                  <div class="blog-box blog-details">
                     <div class="blog-details">
                       <h4>
                         {{kegiatan.judul}}
@@ -62,141 +62,169 @@
                             {{kegiatan.alamat}} - {{kegiatan.kecamatan}}, {{kegiatan.kota}}, {{kegiatan.provinsi}}
                           </li>
                         </ul>
-                        <p style="text-align: justify;">{{kegiatan.deskripsi}}</p>
+                        @each(item in kegiatan.deskripsi.split(/\r?\n/))
+                          @if(item != '')
+                            <p style="text-align: justify;">&ensp;&ensp;{{item}}</p>
+                          @endif
+                        @endeach
                       </div>
                       <h6 class="mt-5">Link Berita Terkait Kegiatan</h6>
                       <div class="single-blog-content-top">
-                        @each(item in kegiatan.link.split(','))
-                        <p><a href="{item}"><i><u>{{item}}</u></i></a></p>
-                          
-                        @endeach
-                      </div>
-
-                      <h6 class="mt-3">Galeri Kegiatan</h6>
-                      <div class="row mb-3">
-                        <div class="col col-3 d-flex align-items-center">
-                          <label class="form-label" for="actual-btn" style="">Tambah Foto Kegiatan</label>
-                        </div>
-                        <div class="col col-9">
-                          <input type="file" id="actual-btn" class="form-control"/>
-                        </div>
-                      </div>
-                      <div class="card border-0">
-                        <div class="gallery p-0 my-gallery card-body row" itemscope="">
-                          <figure class="col-6 col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/01.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/01.jpg" itemprop="thumbnail" alt="Image description"></a>
-                            <figcaption itemprop="caption description">Image caption  1</figcaption>
-                          </figure>
-                          <figure class="col-6 col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/02.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/02.jpg" itemprop="thumbnail" alt="Image description"></a>
-                            {{--  <figcaption itemprop="caption description">Image caption  1</figcaption>  --}}
-                          </figure>
-                          <figure class="col-6 col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/03.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/03.jpg" itemprop="thumbnail" alt="Image description"></a>
-                            {{--  <figcaption itemprop="caption description">Image caption  1</figcaption>  --}}
-                          </figure>
-                          <figure class="col-6 col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/04.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/04.jpg" itemprop="thumbnail" alt="Image description"></a>
-                            {{--  <figcaption itemprop="caption description">Image caption  1</figcaption>  --}}
-                          </figure> 
-                        </div>
+                        @if(kegiatan.link != null)
+                          @each(item in kegiatan.link.split(','))
+                          <p><a href="{item}"><i><u>{{item}}</u></i></a></p>
+                          @endeach  
+                        @endif
                       </div>
                     </div>
                   </div>
                 </div>
+                <h6 class="my-3">Galeri Kegiatan</h6>
+                <label class="form-label mb-1" for="actual-btn" style="">Tambah Foto Kegiatan</label>
+                <div id="diplay_image"></div>
+                <div class="row mb-3">
+                  <div class="col col-7 d-flex align-items-center">
+                    <input type="hidden" name="id" id="id" value="{{kegiatan.id}}">
+                    <input type="file" id="gambar" class="form-control" accept="image/jpeg, image/png, image/jpg">
+                  </div>
+                  <div class="col col-3">
+                    <button type="button" id="tambah" class="btn btn-primary btn-sm">Tambah</button>
+                  </div>
+                </div>
+                <div class="gallery my-gallery card-body row p-0" id="my-galery" itemscope="">
+                  @if(kegiatan.gambar)
+                    @each(item in kegiatan.gambar.split(','))
+                    <figure id="item-fig" class="col-6 col-xl-3 col-md-4 xl-33 mb-5" itemprop="associatedMedia" itemscope="">
+                      <a href="{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}" id="fig" itemprop="contentUrl" data-size="1600x950">
+                        <img class="img-thumbnail" id="image" src="{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}" itemprop="thumbnail" alt="Image description">
+                      </a>
+                      {{--  <figcaption itemprop="caption description">{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}</figcaption>  --}}
+                      <input type="hidden" name="nama_gambar" id="nama_gambar" value="{{item}}">
+                      <button class="btn btn-danger btn-xs mt-3" id="delete_image" type="button" style="width:100%">Delete</button>
+                    </figure>
+                    @endeach
+                  @endif
+                </div>
+              </div>
+            </div> 
+          </div>
+          <!-- Root element of PhotoSwipe. Must have class pswp.-->
+          <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="pswp__bg"></div>
+            <div class="pswp__scroll-wrap">
+              <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item" ></div>
+                <div class="pswp__item"></div>
+              </div>
+              <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                  <div class="pswp__counter"></div>
+                  <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                  <button class="pswp__button pswp__button--share" title="Share"></button>
+                  <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                  <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                  <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button>
+                  <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                  <div class="pswp__share-tooltip"></div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                <div class="pswp__caption">
+                  <div class="pswp__caption__center"></div>
+                </div>
               </div>
             </div>
           </div>
-          <!-- Root element of PhotoSwipe. Must have class pswp.-->
-          
           <!-- Container-fluid Ends-->
         </div>
         
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="card">
-                <div class="card-header pb-0">
-                  <h5>IMAGE GALLERY</h5>
-                </div>
-                <div class="gallery my-gallery card-body row" itemscope="">
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/01.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/01.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  1</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/02.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/02.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  2</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/03.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/03.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  3</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/04.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/04.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  4</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/05.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/05.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  5</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/06.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/06.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  8</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/07.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/07.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  9</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/08.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/08.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  10</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/09.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/09.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  11</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/010.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/010.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  12</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/011.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/011.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  11</figcaption>
-                  </figure>
-                  <figure class="col-xl-3 col-md-4 xl-33" itemprop="associatedMedia" itemscope=""><a href="{{appUrl()}}/assets/images/big-lightgallry/012.jpg" itemprop="contentUrl" data-size="1600x950"><img class="img-thumbnail" src="{{appUrl()}}/assets/images/lightgallry/012.jpg" itemprop="thumbnail" alt="Image description"></a>
-                    <figcaption itemprop="caption description">Image caption  12</figcaption>
-                  </figure>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Root element of PhotoSwipe. Must have class pswp.-->
-        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="pswp__bg"></div>
-          <div class="pswp__scroll-wrap">
-            <div class="pswp__container">
-              <div class="pswp__item"></div>
-              <div class="pswp__item"></div>
-              <div class="pswp__item"></div>
-            </div>
-            <div class="pswp__ui pswp__ui--hidden">
-              <div class="pswp__top-bar">
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <div class="pswp__preloader">
-                  <div class="pswp__preloader__icn">
-                    <div class="pswp__preloader__cut">
-                      <div class="pswp__preloader__donut"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-              </div>
-              <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-              <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-              <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- footer start-->
         
+        <!-- footer start-->
+        <footer class="footer">
+          <div class="container-fluid">
+            
+          </div>
+        </footer>
       </div>
     </div>
-    
+    <script>
+      const id = document.querySelector('#id')
+      const gambar = document.querySelector('#gambar')
+      const tambah = document.querySelector('#tambah')
+      const my_galery = document.querySelector('#my-galery')
+      
+      const api = `{{route('api.gambar')}}`
+      const api_delete = `{{route('api.delete_gambar')}}`
+      const api_fig = `{{appUrl('uploads/images/${id.value}')}}`
+      galery()
+      delete_img()
+
+      function galery() {
+        const image = document.querySelectorAll('#image')
+        const fig = document.querySelectorAll('#fig')
+        image.forEach( (e, i) => {
+          fig[i].setAttribute('data-size', `${e.naturalWidth}x${e.naturalHeight}`)
+        })
+      }
+
+      function delete_img(){
+        const delete_image = document.querySelectorAll('#delete_image')
+        const item_fig = document.querySelectorAll('#item-fig')
+        const nama_gambar = document.querySelectorAll('#nama_gambar')
+
+        delete_image.forEach( (e,i) => {
+          e.addEventListener('click', () => {
+            console.log(item_fig[i])
+            fetch(`${api_delete}?id=${id.value}&&gambar=${nama_gambar[i].value}`)
+            item_fig[i].remove()
+          })
+        })
+      }
+      
+      tambah.addEventListener('click', () => {
+        tambah.innerHTML = `
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>`
+        let post = new FormData()
+        if (gambar.value != null) {
+          post.append('gambar', gambar.files[0])
+          post.append('id', id.value)
+          fetch(api, {method: 'POST', body: post})
+            .then(res => res.json())
+            .then(data => {
+              console.log(data)
+              if (data.status) {
+                my_galery.innerHTML += `
+                <figure id="item-fig" class="col-6 col-xl-3 col-md-4 xl-33 mb-5" itemprop="associatedMedia" itemscope="">
+                  <a href="${api_fig}/${data.fig}" id="fig" itemprop="contentUrl" data-size="1600x950">
+                    <img class="img-thumbnail" id="image" src="${api_fig}/${data.fig}" itemprop="thumbnail" alt="Image description">
+                  </a>
+                  {{--  <figcaption itemprop="caption description">${api_fig}/${data.fig}</figcaption>  --}}
+                  <input type="hidden" name="nama_gambar" id="nama_gambar" value="{{item}}">
+                  <button class="btn btn-danger btn-xs mt-3" id="delete_image" type="button" style="width:100%">Delete</button>
+                </figure>
+                `
+                tambah.innerHTML = 'Tambah' 
+              } else {
+                
+              }
+              delete_img()
+            })
+            galery() 
+        }
+      })
+
+    </script>
     <!-- latest jquery-->
     @include('partials/script')
     <!-- Plugins JS start-->
@@ -207,5 +235,6 @@
     <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
     <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe.js"></script>
     <!-- Plugin used-->
+
   </body>
 </html>

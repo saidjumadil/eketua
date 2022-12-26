@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('jenis').notNullable()
       table.string('warna').notNullable()
       table.string('judul').notNullable()
-      table.string('deskripsi')
+      table.text('deskripsi')
       table.date('tanggal')
       table.integer('id_provinsi')
       table.string('provinsi')
