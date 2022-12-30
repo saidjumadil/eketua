@@ -23,11 +23,13 @@ import './hook'
 
 Route.group(() => {
   Route.on('/').redirect('/login')
-  Route.get('login', 'Auth/AuthController.index').as('login')
-  Route.post('login', 'Auth/AuthController.login').as('login.check')
+  Route.get('login', 'AuthController.index').as('login')
+  Route.post('login', 'AuthController.login').as('login.check')
+  Route.post('gantiPassword', 'AuthController.gantiPassword').as('gantiPassword')
+  Route.get('gantiPassword', 'AuthController.view_gantiPassword').as('view.gantiPassword')
+  Route.get('logout', 'AuthController.logout').as('logout')
 })
 
-Route.get('logout', 'Auth/AuthController.logout').as('logout')
 
 
 Route.get('/beranda','BerandasController.index').as('beranda')
@@ -43,6 +45,13 @@ Route.group(() => {
   Route.get('/hapus/:id', 'KegiatansController.hapus').as('hapus')
   Route.post('/add', 'KegiatansController.post').as('post')
 }).prefix('kegiatan').as('kegiatan')
+
+Route.group(() => {
+  Route.get('/', 'UsersController.index').as('index')
+  Route.post('/', 'UsersController.post').as('post')
+  Route.post('/edit', 'UsersController.editPost').as('editPost')
+  Route.post('/hapus', 'UsersController.hapus').as('hapus')
+}).prefix('admin').as('admin')
 
 Route.group(() => {
   Route.get('provinsi', 'ApiController.provinsi').as('provinsi')

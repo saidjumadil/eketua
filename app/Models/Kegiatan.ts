@@ -50,6 +50,9 @@ export default class Kegiatan extends BaseModel {
   @column()
   public gambar: string
 
+  @column()
+  public yt: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

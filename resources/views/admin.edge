@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partials/head')
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/datatables.css">
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      @include('partials/header')     
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+      
+        <!-- Page Sidebar Start-->
+        @!component('partials/nav', {
+          nama : "Said Jumadil Akbar"
+        })
+        <!-- Page Sidebar Ends-->
+        
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+          <div class="container-fluid dashboard-default-sec">
+            <div class="col-sm-6">
+              <h3>List Admin</h3>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">E-Kinerja Ketua / <a href="{{route('admin.index')}}">User Admin</a></li>
+              </ol>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                @if(flashMessages.get('status'))
+                  <div class="col-sm-12 bg-{{flashMessages.get('status.type')}} b-r-4">
+                    <div class="alert alert-{{flashMessages.get('status.type')}} dark alert-dismissible fade show" role="alert">{{flashMessages.get('status.message')}}
+                      <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close" data-bs-original-title="" title=""></button>
+                    </div>
+                  </div>
+                @end
+                <div class="col mb-3 text-end">
+                  @!component('component/modal/admin/add')
+                </div>
+                <div class="card-block row mt-4">
+                      <div class="col-sm-12 col-lg-12 col-xl-12">
+                          <div class="table-responsive">
+                              <table class="display table-bordered" id="basic-1">
+                                  <thead class="table-primary">
+                                      <tr>
+                                          <th scope="col" style="width:20px">No</th>
+                                          <th scope="col">Nomor KTP</th>
+                                          <th scope="col">Nama</th>
+                                          <th scope="col">Nomor Handphone</th>
+                                          <th scope="col">Alamat</th>
+                                          <th scope="col">Email</th>
+                                          <th scope="col"></th>
+                                          <th scope="col"></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    @each((item, index) in user)
+                                      <tr>
+                                        <th scope="col">{{index + 1}}</th>
+                                        <td>{{item.ktp}}</td>
+                                        <td>{{item.nama}}</td>
+                                        <td>{{item.no_hp}}</td>
+                                        <td>{{item.alamat}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td style="text-align:center">
+                                          @!component('component/modal/admin/edit', {
+                                            "index" : index + 1,
+                                            id : item.id,
+                                            ktp : item.ktp,
+                                            nama : item.nama,
+                                            no_hp : item.no_hp,
+                                            alamat : item.alamat,
+                                            email : item.email
+                                          })
+                                        </td>
+                                        <td style="text-align:center">
+                                          <form action="{{route('admin.hapus')}}" method="post">
+                                            <input type="hidden" name="id" id="id" value="{{item.id}}">
+                                            <button class="btn btn-danger" id="" type="submit">Hapus</button>
+                                          </form>
+                                        </td>
+                                      </tr>
+                                    @endeach
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Container-fluid Ends-->
+        </div>
+
+        <!-- footer start-->
+        
+      </div>
+    </div>
+    <!-- latest jquery-->
+    @include('partials/script')
+    <!-- Plugins JS start-->
+    <script src="{{appUrl()}}/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/datatable/datatables/datatable.custom.js"></script>
+    <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
+    <!-- Plugins JS Ends-->
+    
+    <!-- Plugin used-->
+  </body>
+</html>

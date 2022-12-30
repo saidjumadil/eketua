@@ -68,6 +68,11 @@
                           @endif
                         @endeach
                       </div>
+                      @if(kegiatan.yt)
+                        <div class="d-flex justify-content-center mt-3">
+                          <iframe width="560" height="315" src="https://www.youtube.com/embed/ypPFDwFdE6s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                      @endif
                       <h6 class="mt-5">Link Berita Terkait Kegiatan</h6>
                       <div class="single-blog-content-top">
                         @if(kegiatan.link != null)

@@ -96,6 +96,14 @@
                     </div>
                   </div>
                   <div class="mb-3">
+                    <label class="form-label" for="yt">Judul Kegiatan</label>
+                    @if(kegiatan.yt == null || kegiatan.yt == '')
+                      <input class="form-control digits" type="text" name="yt" id="yt" placeholder="Link Youtube Video">
+                    @else
+                      <input class="form-control digits" type="text" name="yt" id="yt" placeholder="Link Youtube Video" value="{{kegiatan.yt}}">
+                    @endif
+                  </div>
+                  <div class="mb-3">
                     <label class="form-label" for="input_link">Link Berita Kegiatan</label>
                     <input class="form-control" type="text" aria-label="file example" name="link[]" id="input_link">
                     <p>*Tekan Spasi untuk menambahkan link berita</p>

@@ -1,14 +1,24 @@
 <div class="col col-2 col-sm-2 col-xl-2 box-col-4 des-xl-50">
-    <div class="card border-0">
-      <div class="blog-box blog-grid">
-        <div class="blog-wrraper" style="height:130px"><a href="{{route('kegiatan.rincian', {'id':`${id}`})}}"><img class="img-fluid top-radius-blog" src="{{gambar}}" style="height:auto; width:auto" alt=""></a></div>
-        <div class="blog-details-second border">
-          <div class="blog-post-date"></div>
-          <a href="{{route('kegiatan.rincian', {'id':`${id}`})}}">
+  <div class="card border-0">
+    <div class="blog-box blog-grid">
+      @if(id_kegiatan == 0)
+      <div class="blog-wrraper" style="height:130px"><a href="{{route('deskripsi')}}" ><img class="img-fluid top-radius-blog" src="{{gambar}}" style="height:auto; width:auto" alt=""></a></div>
+      @else
+      <div class="blog-wrraper" style="height:130px"><a href="{{route('kegiatan.rincian', {'id':`${id_kegiatan}`})}}" ><img class="img-fluid top-radius-blog" src="{{gambar}}" style="height:auto; width:auto" alt=""></a></div>
+      @endif
+      <div class="blog-details-second border">
+        <div class="blog-post-date"></div>
+        @if(id_kegiatan == 0)
+          <a href="{{route('deskripsi')}}">
             <h6 class="blog-bottom-details mt-5">{{judul}}</h6>
           </a>
-          <p>{{ringkasan}}</p>
-        </div>
+        @else
+          <a href="{{route('kegiatan.rincian', {'id':`${id_kegiatan}`})}}">
+            <h6 class="blog-bottom-details mt-5">{{judul}}</h6>
+          </a>
+        @endif
+        <p>{{ringkasan}}</p>
       </div>
     </div>
   </div>
+</div>

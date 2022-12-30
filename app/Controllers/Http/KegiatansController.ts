@@ -45,6 +45,7 @@ export default class KegiatansController {
             id_kecamatan: kecamatan[0],
             kecamatan: kecamatan[1],
             alamat: post.alamat,
+            yt: post.yt,
             link: post.link ? post.link.toString() : ''
           }
 
@@ -88,6 +89,7 @@ export default class KegiatansController {
             id_kecamatan: kecamatan[0],
             kecamatan: kecamatan[1],
             alamat: post.alamat,
+            yt: post.yt,
             link: post.link ? post.link.toString() : ''
           }
 

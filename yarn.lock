@@ -53,6 +53,15 @@
     "picomatch" "^2.3.1"
     "slash" "^3.0.0"
 
+"@adonisjs/auth@^8.2.3":
+  "integrity" "sha512-js9e8AHEsNC/8MGvho6MgL+uXr8SlhTg9MJJDWQBBiqsKkT7+H7NMP/pLbuSzYaaf40t2u/OXfq6wXuIC5ZYvw=="
+  "resolved" "https://registry.npmjs.org/@adonisjs/auth/-/auth-8.2.3.tgz"
+  "version" "8.2.3"
+  dependencies:
+    "@poppinss/hooks" "^5.0.3"
+    "@poppinss/utils" "^5.0.0"
+    "luxon" "^3.0.4"
+
 "@adonisjs/bodyparser@^8.0.0", "@adonisjs/bodyparser@^8.1.7":
   "integrity" "sha512-2ixzKGszAez1Qq6KNsNs0LcKSfqnZMiaqMleuTh/m4pBLw9CTsVqFS2YH181+6pBhFcTVcXkByh6T1P48Tq5Cw=="
   "resolved" "https://registry.npmjs.org/@adonisjs/bodyparser/-/bodyparser-8.1.7.tgz"
@@ -75,7 +84,7 @@
   dependencies:
     "@poppinss/utils" "^5.0.0"
 
-"@adonisjs/core@^5.0.0", "@adonisjs/core@^5.1.0", "@adonisjs/core@^5.7.0", "@adonisjs/core@^5.8.0":
+"@adonisjs/core@^5.0.0", "@adonisjs/core@^5.1.0", "@adonisjs/core@^5.7.0", "@adonisjs/core@^5.7.1", "@adonisjs/core@^5.8.0":
   "integrity" "sha512-bdlVqb6nJD/PkESrKZYO4PjmMqCpglt38kuwS1eUgHVWFrpfwvA4mbtF3T+apiTZMxc34oM79jpUtZOuLpt0uA=="
   "resolved" "https://registry.npmjs.org/@adonisjs/core/-/core-5.8.9.tgz"
   "version" "5.8.9"
@@ -191,7 +200,7 @@
     "abstract-logging" "^2.0.1"
     "pino" "^6.14.0"
 
-"@adonisjs/lucid@^18.2.0":
+"@adonisjs/lucid@^18.0.0", "@adonisjs/lucid@^18.2.0":
   "integrity" "sha512-lF6+euwM5sOvpaUy+de+lfMKWjzpRFCvTbko+36bOz9IbUilQtnO3pzPNf7uTj5XUalFTICpVAzw8b8beQtb3g=="
   "resolved" "https://registry.npmjs.org/@adonisjs/lucid/-/lucid-18.2.0.tgz"
   "version" "18.2.0"
@@ -1775,6 +1784,11 @@
   "integrity" "sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow=="
   "resolved" "https://registry.npmjs.org/crypt/-/crypt-0.0.2.tgz"
   "version" "0.0.2"
+
+"crypto-js@^4.1.1":
+  "integrity" "sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw=="
+  "resolved" "https://registry.npmjs.org/crypto-js/-/crypto-js-4.1.1.tgz"
+  "version" "4.1.1"
 
 "csrf@^3.1.0":
   "integrity" "sha512-uTqEnCvWRk042asU6JtapDTcJeeailFy4ydOQS28bj1hcLnYRiqi8SsD2jS412AY1I/4qdOwWZun774iqywf9w=="
@@ -3445,7 +3459,7 @@
   dependencies:
     "yallist" "^4.0.0"
 
-"luxon@^3.0.3", "luxon@^3.1.0":
+"luxon@^3.0.3", "luxon@^3.0.4", "luxon@^3.1.0":
   "integrity" "sha512-7w6hmKC0/aoWnEsmPCu5Br54BmbmUp5GfcqBxQngRcXJ+q5fdfjEzn7dxmJh2YdDhgW8PccYtlWKSv4tQkrTQg=="
   "resolved" "https://registry.npmjs.org/luxon/-/luxon-3.1.0.tgz"
   "version" "3.1.0"
