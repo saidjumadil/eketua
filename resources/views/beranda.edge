@@ -32,13 +32,10 @@
         
         <div class="page-body">
           <!-- Container-fluid starts-->
-          <div class="blog-single mb-3" >
-            <div class="blog-box blog-details">
-              <div class="banner-wrraper" style="height: 150px">
-                <img class="img-fluid bg-img-cover" style="height: 200px" src="{{appUrl()}}/assets/images/bg-depan.jpg" alt="blog-main">
-              </div>
-            </div>
-          </div>
+          <header class="header-fixed-banner mb-3">
+            <img id="banner" class="img-fluid bg-img-cover" src="{{appUrl()}}/assets/images/bg-depan.jpg" height="auto" width="100%" style="display: block !important;">
+          </header>
+          
           <div class="row px-3">
             <div class="col col-12 col-xl-6">
               <div class="container-fluid dashboard-default-sec p-0">
@@ -137,6 +134,7 @@
     <script src="{{appUrl()}}/assets/js/tooltip-init.js"></script>
     <!-- Plugins JS Ends-->
     <script>
+      document.getElementById('banner').style.display = 'block'
       let warna = []
       const api = `{{route('api.chart')}}`
       fetch(api)
@@ -144,7 +142,7 @@
         .then(data => {
           console.log(data)
           data.jenis.forEach(e => {
-            e.y = Math.random() * 100
+            e.y = Math.floor(Math.random() * 100)
           })
           chart(data.jenis)
         })
@@ -161,7 +159,7 @@
         var options51 = {
           series: [
             {
-              name: "Pendapatan ",
+              name: "Jumlah ",
               data: isi
             }
           ],

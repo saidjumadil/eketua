@@ -35,7 +35,9 @@
           <div class="container-fluid dashboard-default-sec">
             <div class="blog-single">
               <div class="blog-box blog-details">
-                <div class="banner-wrraper" style="height: 150px"><img class="img-fluid w-100 bg-img-cover" src="{{appUrl()}}/assets/images/bg-depan.jpg" alt="blog-main"></div>
+                <header class="header-fixed-banner mb-3">
+                  <img id="banner" class="img-fluid bg-img-cover" src="{{appUrl()}}/assets/images/bg-depan.jpg" height="auto" width="100%" style="display: block !important;">
+                </header>
                 <div class="card">
                   <div class="card-body">
                     <div class="blog-details">
@@ -78,7 +80,9 @@
     <script src="{{appUrl()}}/assets/js/chart/apex-chart/stock-prices.js"></script>
     <script src="{{appUrl()}}/assets/js/chart/apex-chart/chart-custom.js"></script>
     <!-- Plugins JS Ends-->
-    
+    <script>
+      document.getElementById('banner').style.display = 'block'
+    </script>
     <!-- Plugin used-->
   </body>
 </html>
