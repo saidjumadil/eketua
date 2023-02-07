@@ -148,7 +148,7 @@
         const item_list = document.querySelectorAll('#item_list')
         const hapus = document.querySelectorAll('#delete')
 
-        hapus.forEach(i => i.addEventListener('click', () => {
+        hapus.forEach((i, index) => i.addEventListener('click', () => {
             console.log('hapus')
             item_list[index].remove()
           }))

@@ -19,8 +19,8 @@ export default class extends BaseSchema {
       table.integer('id_kecamatan')
       table.string('kecamatan')
       table.string('alamat')
-      table.string('link')
-      table.string('gambar')
+      table.text('link')
+      table.text('gambar')
       table.string('yt')
 
       /**
