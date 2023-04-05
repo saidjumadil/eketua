@@ -4,4 +4,8 @@ export default class DeskripsisController {
     async index({view}){
         return view.render('deskripsi')
     }
+
+    async biodata({view}){
+        return view.render('biodata')
+    }
 }

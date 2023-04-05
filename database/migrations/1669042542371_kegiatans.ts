@@ -21,7 +21,7 @@ export default class extends BaseSchema {
       table.string('alamat')
       table.text('link')
       table.text('gambar')
-      table.string('yt')
+      table.text('yt')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

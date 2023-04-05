@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include('partials/head')
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/photoswipe.css">
+    <!-- Plugins css Ends-->
+  </head>
+  <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+      <div class="theme-loader">    
+        <div class="loader-p"></div>
+      </div>
+    </div>
+    <!-- Loader ends-->
+    <!-- page-wrapper Start       -->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      @include('partials/header')     
+      <!-- Page Header Ends -->
+      
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper sidebar-icon">
+      
+        <!-- Page Sidebar Start-->
+        @!component('partials/nav', {
+          nama : "Said Jumadil Akbar"
+        })
+        <!-- Page Sidebar Ends-->
+        
+        <div class="page-body">
+          <!-- Container-fluid starts-->
+          
+          <div class="container-fluid dashboard-default-sec">
+            <div class="blog-single">
+              <div class="blog-box blog-details">
+                <header class="header-fixed-banner mb-3">
+                  <img id="banner" class="img-fluid bg-img-cover" src="{{appUrl()}}/assets/images/eketua.jpg" height="auto" width="100%" style="display: block !important;">
+                </header>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="blog-details">
+                      <ul class="blog-social">
+                        <li><i class="icofont icofont-calendar"></i>{{date(new Date())}}</li>
+                        <li><i class="icofont icofont-social-google-map"></i>Gedung DPRK Banda Aceh - <span>Banda Aceh </span></li>
+                      </ul>
+                      <h4>
+                        Biodata Ketua DPRK Banda Aceh
+                      </h4>
+                      <div class="single-blog-content-top">
+                        <p style="text-align: justify;">Farid Nyak Umar (lahir 30 Juni 1978) adalah politikus Partai Keadilan Sejahtera yang menjabat sebagai Ketua DPRK Banda Aceh sejak 8 Oktober 2019. Ia menjadi anggota DPRK Banda Aceh termuda saat terpilih dalam Pemilu 2004 pada saat berumur 24 tahun. Ia pernah menjadi calon wakil wali kota Banda Aceh pada Pilkada Banda Aceh 2017 mendampingi wali kota petahana Illiza Sa’aduddin Djamal, tetapi akhirnya tidak berhasil menjadi juara.</p>
+                        <br>
+                        <h6>Kehidupan Pribadi</h6>
+                        <p style="text-align: justify;">
+                          Farid Nyak Umar memiliki nama panggilan Farid. Ia merupakan anak ketujuh dari sebelas bersaudara. Ayahnya bernama Nyak Umar Hasan dan ibunya bernama Johari Abdullah Ali. Farid berasal dari keluarga pengusaha. Ayahnya, Nyak Umar Hasan, lebih dikenal dengan nama Toke Uma Bina Usaha. Nama tersebut berasal dari pabrik tegel miliknya yang berjaya pada era 1990-an di Beureunuen. Selain itu, Toke Uma juga dikenal aktif dalam kegiatan sosial dan sering menjadi panitia dalam peringatan hari besar Islam (PHBI) di Masjid Baitul A’la Limujahidin (Masjid Abu Bereueh) Beureunuen. Sementara itu, kakek dari pihak ibunya, Abdullah Ali, merupakan pemilik Toko Yaman yang berlokasi di Jalan Diponegoro, Kota Banda Aceh. Selain memiliki toko, kakeknya juga memiliki Kilang Padi AA yang akhirnya melekat menjadi nama panggilannya, Toke Lah AA.
+                        </p>
+                        <p>
+                          Farid menyelesaikan pendidikan dasar (SD dan SMP) di Bereunuen, Kecamatan Mutiara, Kabupaten Pidie. Ia dikenal sebagai salah satu murid berprestasi yang sering menjadi juara kelas. Farid melanjutkan pendidikan menengahnya di SMA Negeri Beureunuen (sekarang SMA Negeri 1 Mutiara), Kabupaten Pidie, tetapi hanya selama satu semester karena kemudian pindah ke Kota Banda Aceh pada tahun 1994. Farid merupakan lulusan SMA Negeri 3 Banda Aceh tahun 1996. Ia kemudian melanjutkan pendidikannya di Fakultas Teknik Universitas Syiah Kuala (Unsyiah). Farid menyelesaikan studinya di Jurusan Teknik Sipil pada tahun 2003 dan mendapatkan gelar Sarjana Teknik (S.T.).
+                        </p>
+                        <p style="text-align: justify;">
+                          Farid menikah dengan Santi Zuhra dan telah dikaruniai dua orang anak. Putrinya bernama Syathira Az-Zahra dan putranya bernama Muhammad Syatir Al-Fatih.
+                        </p>
+
+                        <br>
+                        <h6>Karier Politik</h6>
+                        <p style="text-align: justify;">
+                          Farid mulai mengenal dunia politik setelah pindah ke Kota Banda Aceh dan bersentuhan langsung dengan dunia politik ketika kuliah. Ia aktif berorganisasi dan banyak bergaul dengan praktisi dalam dunia politik. Ia tercatat sebagai salah satu aktivis Kesatuan Aksi Mahasiswa Muslim Indonesia (KAMMI) dan kader Ikatan Siswa Kader Dakwah (ISKADA). Saat masih tercatat sebagai seorang mahasiswa, Farid telah aktif dalam kegiatan dakwah. Ia sering mengisi pengajian dan mulai menjadi seorang khatib Jumat sejak tahun 2002. Farid pertama kali terjun dalam politik praktis ketika menjadi pengurus tingkat ranting Partai Keadilan yang sekarang dikenal sebagai Partai Keadilan Sejahtera (PKS) di Gampong Jeulingke, Kecamatan Syiah Kuala, Kota Banda Aceh. Karier kepartaiannya kemudian terus meningkat hingga saat ini dipercaya sebagai Ketua Majelis Pertimbangan Daerah (MPD) PKS Kota Banda Aceh serta aktif dalam Majelis Pertimbangan Wilayah (MPW) PKS Aceh sebagai sekretaris.
+                        </p>
+                        <p style="text-align: justify;">
+                          Farid pertama kali mencalonkan diri sebagai anggota legilatif pada Pemilu 2004, setahun setelah ia menamatkan studi sarjananya. Ia terpilih sebagai anggota DPRK Banda Aceh termuda dalam usia 24 tahun dan menjabat selama periode 2004-2009. Tidak sekadar menjadi anggota termuda, Farid menduduki posisi Sekretaris Komisi C DPRK Banda Aceh selama 2006-2009. Selain itu, ia juga merupakan anggota Badan Anggaran DPRK Banda Aceh dari PKS selama periode 2004-2009. Farid bahkan menjadi Peserta Muda Terbaik Pendidikan Lemhannas RI pada tahun 2007.
+                        </p>
+                        <p style="text-align: justify;">
+                          Pada Pemilu 2009, ia kembali mencalonkan diri sebagai anggota DPRK Banda Aceh namun gagal. Selama periode 2009-2014, ia tetap memilih berkecimpung dalam dunia politik dengan menjadi Staf Ahli Fraksi PKS di DPRK Banda Aceh. Farid akhirnya kembali terpilih dalam Pemilu 2014 dan dilantik menjadi anggota DPRK Banda Aceh periode 2014-2019. Farid kemudian dipercaya menjadi Sekretaris Fraksi PKS dan menduduki posisi Ketua Komisi D DPRK Banda Aceh selama 2014-2016. Pada 26 Oktober 2016, ia mengundurkan diri karena mendapat kesempatan untuk berkompetisi dalam Pilkada Banda Aceh 2017. Ia dipercaya mendampingi wali kota petahana, Illiza Sa’aduddin Djamal, sebagai calon wakil wali kota Banda Aceh.
+                        </p>
+                        <p style="text-align: justify;">
+                          Farid Nyak Umar yang mendampingi Illiza Sa’aduddin Djamal, politikus Partai Persatuan Pembangunan, sebagai pasangan calon wali kota dan wakil wali kota Banda Aceh pada Pilkada Banda Aceh 2017 diusung oleh 5 partai politik dengan kekuatan 17 kursi dari 30 kursi DPRK Banda Aceh. Pasangan Illiza-Farid didukung oleh Partai Demokrat (5 kursi), Partai Aceh (4 kursi), Partai Keadilan Sejahtera (4 kursi), Partai Persatuan Pembangunan (3 kursi), dan Partai Damai Aceh (1 kursi). Selain itu, Illiza-Farid juga didukung oleh Partai Demokrasi Indonesia Perjuangan yang tidak memiliki kursi di DPRK Banda Aceh. Walaupun memiliki dukungan lebih dari setengah total kursi DPRK Banda Aceh mendampingi wali kota petahana, Farid gagal terpilih menjadi Wakil Wali Kota Banda Aceh. Ia dikalahkan oleh pasangan Aminullah Usman-Zainal Arifin yang diusung oleh Partai Nasional Demokrat, Partai Amanat Nasional, Partai Golongan Karya, dan Partai Gerakan Indonesia Raya. Pasangan Illiza-Farid hanya mampu meraih 31.366 suara (33,21 %), sedangkan pasangan Aminullah-Zainal berhasil meraih 63.087 suara (66,79 %). Setelah gagal dalam kontestasi Pilkada Banda Aceh 2017, Farid meneruskan kiprahnya dalam kepengurusan PKS Kota Banda Aceh sambil mempersiapkan diri bertarung kembali menjadi calon anggota legislatif dalam Pemilu 2019.
+                        </p>
+                        <p style="text-align: justify;">
+                          Pada Pemilu 2019, Farid berhasil mengumpulkan 1.267 suara di Daerah Pemilihan (Dapil) Kota Banda Aceh 2 yang meliputi Kecamatan Kuta Alam. Ia menjadi peraih suara tertinggi diantara calon separtainya di dapil tersebut. Farid berhasil terpilih untuk ketiga kalinya setelah ditetapkan sebagai salah satu dari lima anggota DPRK Banda Aceh terpilih periode 2019-2024 dari Partai Keadilan Sejahtera. Partainya berhasil menjadi juara dengan raihan jumlah kursi terbanyak di DPRK Banda Aceh dan berhak mendudukkan salah satu kadernya sebagai Ketua DPRK Banda Aceh periode 2019-2024. Farid Nyak Umar kemudian diusulkan oleh PKS sebagai Ketua DPRK Banda Aceh definitif periode 2019-2014. Ia dilantik bersama dua wakil ketua dari Partai Amanat Nasional dan Partai Demokrat pada 8 Oktober 2019 oleh Ketua Pengadilan Negeri Banda Aceh, Ainal Mardhiah. Sebagai Ketua DPRK Banda Aceh, Farid memandang bahwa DPRK Banda Aceh adalah mitra strategis Pemerintah Kota Banda Aceh yang harus saling bersinergi untuk mewujudkan Banda Aceh Gemilang dalam Bingkai Syariah.
+                        </p>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+          
+          <!-- Container-fluid Ends-->
+        </div>
+
+        <!-- footer start-->
+        
+      </div>
+    </div>
+    <!-- latest jquery-->
+    @include('partials/script')
+    <!-- Plugins JS start-->
+    <script src="{{appUrl()}}/assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/counter/counter-custom.js"></script>
+    <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/photoswipe/photoswipe.js"></script>
+    <script src="{{appUrl()}}/assets/js/chart/apex-chart/apex-chart.js"></script>
+    <script src="{{appUrl()}}/assets/js/chart/apex-chart/stock-prices.js"></script>
+    <script src="{{appUrl()}}/assets/js/chart/apex-chart/chart-custom.js"></script>
+    <!-- Plugins JS Ends-->
+    <script>
+      document.getElementById('banner').style.display = 'block'
+    </script>
+    <!-- Plugin used-->
+  </body>
+</html>

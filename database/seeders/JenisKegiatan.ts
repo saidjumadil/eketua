@@ -18,7 +18,7 @@ export default class extends BaseSeeder {
         warna : 'C0E218'
       }, 
       {
-        jenis : 'Kunjuan Konstituen',
+        jenis : 'Kunjungan Konstituen',
         warna : 'F37121'
       }, 
       {

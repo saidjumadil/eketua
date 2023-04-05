@@ -29,6 +29,13 @@ export default class KegiatansController {
         const kota = post.kota.split('-')
         const kecamatan = post.kecamatan.split('-')
 
+        let list : any = []
+
+        for(let i of post.link_yt){
+            const link = i.split('=')
+            list.push(link[1].split('&')[0])
+        }
+
         const jenis_detail : any = await JenisKegiatan.query().where('id', jenis[0]).first()
 
         const data : any = {
@@ -45,11 +52,10 @@ export default class KegiatansController {
             id_kecamatan: kecamatan[0],
             kecamatan: kecamatan[1],
             alamat: post.alamat,
-            yt: post.yt,
+            yt: list.toString(),
             link: post.link ? post.link.toString() : ''
           }
 
-        console.log(data)
         const add = await Kegiatan.query().where('id', post.id).update(data)
         if (add) {
             session.flash('status', {type : 'success', message : 'Kegiatan Berhasil DiTambahkan'})
@@ -73,6 +79,13 @@ export default class KegiatansController {
         const kota = post.kota.split('-')
         const kecamatan = post.kecamatan.split('-')
 
+        let list : any = []
+
+        for(let i of post.link_yt){
+            const link = i.split('=')
+            list.push(link[1].split('&')[0])
+        }
+
         const jenis_detail : any = await JenisKegiatan.query().where('id', jenis[0]).first()
 
         const data : any = {
@@ -89,7 +102,7 @@ export default class KegiatansController {
             id_kecamatan: kecamatan[0],
             kecamatan: kecamatan[1],
             alamat: post.alamat,
-            yt: post.yt,
+            yt: list.toString(),
             link: post.link ? post.link.toString() : ''
           }
 

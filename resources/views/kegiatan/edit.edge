@@ -97,11 +97,19 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="yt">Judul Kegiatan</label>
-                    @if(kegiatan.yt == null || kegiatan.yt == '')
-                      <input class="form-control digits" type="text" name="yt" id="yt" placeholder="Link Youtube Video">
-                    @else
-                      <input class="form-control digits" type="text" name="yt" id="yt" placeholder="Link Youtube Video" value="{{kegiatan.yt}}">
-                    @endif
+                    <input class="form-control digits" type="text" name="yt" id="yt" placeholder="Link Youtube Video">
+                    <p>*Tekan Spasi untuk menambahkan link Youtube</p>
+                    <div id="youtube">
+                      @each(item in kegiatan.yt.split(','))
+                        <div id="item_list_yt" class="row mt-2">
+                          <input type="hidden" id="link_yt[]" name="link_yt[]" value="https://www.youtube.com/watch?v={{item}}">
+                          <a class="col col-9 mr-1" rel="stylesheet" href="https://www.youtube.com/watch?v={{item}}" target="_blank">https://www.youtube.com/watch?v={{item}}</a>
+                          <div class="col col-2">
+                            <button type="button" id="delete_yt" class="btn btn-danger btn-xs"><span class="icon-close"></span></button>
+                          </div>
+                        </div>
+                      @endeach
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="input_link">Link Berita Kegiatan</label>
@@ -139,6 +147,8 @@
       const link = document.querySelector('#link')
       const input_link = document.querySelector('#input_link')
       const list = document.querySelector('#list')
+      const youtube = document.querySelector('#youtube')
+      const yt = document.querySelector('#yt')
       const provinsi = document.querySelector('#provinsi')
       const kota = document.querySelector('#kota')
       const kecamatan = document.querySelector('#kecamatan')
@@ -177,6 +187,35 @@
       function deleteList(){
         const item_list = document.querySelectorAll('#item_list')
         const hapus = document.querySelectorAll('#delete')
+
+        hapus.forEach((i, index) => i.addEventListener('click', () => {
+            console.log('hapus')
+            item_list[index].remove()
+          }))
+      }
+
+      //tekan spasi untuk tambah link Yt
+      yt.addEventListener('keypress', (res) => {
+        if(res.key === ' ' || res.key === 'Enter'){
+          youtube.innerHTML += `
+          <div id="item_list_yt" class="row mt-2">
+            <input type="hidden" id="link_yt[]" name="link_yt[]" value="${yt.value}">
+            <a class="col col-9 mr-1" rel="stylesheet" href="${yt.value}" target="_blank">${yt.value}</a>
+            <div class="col col-2">
+              <button type="button" id="delete_yt" class="btn btn-danger btn-xs"><span class="icon-close"></span></button>
+            </div>
+          </div>
+          `
+          yt.value = ''
+          deleteListYt()
+        }
+      })
+
+      //Delete Link Yt
+      deleteListYt()
+      function deleteListYt(){
+        const item_list = document.querySelectorAll('#item_list_yt')
+        const hapus = document.querySelectorAll('#delete_yt')
 
         hapus.forEach((i, index) => i.addEventListener('click', () => {
             console.log('hapus')

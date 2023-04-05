@@ -19,7 +19,12 @@
                   </div>
                   </li>
                   <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('beranda')}}"><i data-feather="home"></i><span>Beranda</span></a></li>
-                  <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('deskripsi')}}"><i data-feather="file-text"></i><span>Tentang Aplikasi</span></a></li>
+                  {{--  <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('deskripsi')}}"><i data-feather="file-text"></i><span>Tentang Aplikasi</span></a></li>  --}}
+                  <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="file-text"></i><span>Tentang</span></a>
+                    <ul class="nav-submenu menu-content">
+                        <li><a href="{{route('biodata')}}">Biodata</a></li>
+                        <li><a href="{{route('deskripsi')}}">Aplikasi</a></li>
+                    </ul>
                   <li class="dropdown"><a class="nav-link menu-title link-nav active" href="{{route('kegiatan.index')}}"><i data-feather="calendar"></i><span>Kegiatan</span></a></li>
                   <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="user"></i><span>User Admin</span></a>
                     <ul class="nav-submenu menu-content">

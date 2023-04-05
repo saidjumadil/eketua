@@ -34,6 +34,7 @@ Route.group(() => {
 
 Route.get('/beranda','BerandasController.index').as('beranda')
 Route.get('/deskripsi', 'DeskripsisController.index').as('deskripsi')
+Route.get('/biodata', 'DeskripsisController.biodata').as('biodata')
 
 Route.group(() => {
   Route.get('/', 'KegiatansController.index').as('index')
