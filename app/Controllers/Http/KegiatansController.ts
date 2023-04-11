@@ -81,9 +81,11 @@ export default class KegiatansController {
 
         let list : any = []
 
-        for(let i of post.link_yt){
-            const link = i.split('=')
-            list.push(link[1].split('&')[0])
+        if (post.link_yt) {
+            for(let i of post.link_yt){
+                const link = i.split('=')
+                list.push(link[1].split('&')[0])
+            }
         }
 
         const jenis_detail : any = await JenisKegiatan.query().where('id', jenis[0]).first()

@@ -37,6 +37,10 @@ Route.get('/deskripsi', 'DeskripsisController.index').as('deskripsi')
 Route.get('/biodata', 'DeskripsisController.biodata').as('biodata')
 
 Route.group(() => {
+  Route.get('/', 'GalerisController.index').as('index')
+}).prefix('galeri').as('galeri')
+
+Route.group(() => {
   Route.get('/', 'KegiatansController.index').as('index')
   Route.get('/by-month/:bulan/:tahun', 'KegiatansController.perBulan').as('perBulan')
   Route.get('/rincian/:id', 'KegiatansController.rincian').as('rincian')
