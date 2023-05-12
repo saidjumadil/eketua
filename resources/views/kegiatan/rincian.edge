@@ -103,7 +103,7 @@
                     @each(item in kegiatan.gambar.split(','))
                     <figure id="item-fig" class="col-6 col-xl-3 col-md-4 xl-33 mb-5" itemprop="associatedMedia" itemscope="">
                       <a href="{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}" id="fig" itemprop="contentUrl" data-size="1600x950">
-                        <img class="img-thumbnail" id="image" src="{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}" itemprop="thumbnail" alt="Image description">
+                        <img class="img-thumbnail" style="object-fit: contain" id="image" src="{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}" itemprop="thumbnail" alt="Image description">
                       </a>
                       {{--  <figcaption itemprop="caption description">{{appUrl(`uploads/images/${kegiatan.id}/${item}`)}}</figcaption>  --}}
                       <input type="hidden" name="nama_gambar" id="nama_gambar" value="{{item}}">
@@ -214,7 +214,7 @@
                 my_galery.innerHTML += `
                 <figure id="item-fig" class="col-6 col-xl-3 col-md-4 xl-33 mb-5" itemprop="associatedMedia" itemscope="">
                   <a href="${api_fig}/${data.fig}" id="fig" itemprop="contentUrl" data-size="1600x950">
-                    <img class="img-thumbnail" id="image" src="${api_fig}/${data.fig}" itemprop="thumbnail" alt="Image description">
+                    <img class="img-thumbnail" style="object-fit: contain" id="image" src="${api_fig}/${data.fig}" itemprop="thumbnail" alt="Image description">
                   </a>
                   {{--  <figcaption itemprop="caption description">${api_fig}/${data.fig}</figcaption>  --}}
                   <input type="hidden" name="nama_gambar" id="nama_gambar" value="{{item}}">

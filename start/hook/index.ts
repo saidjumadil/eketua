@@ -50,4 +50,13 @@ View.global('tanggal', (tanggal) => {
   return `${year}-${month}-${date}`
 })
 
+View.global('time', (tanggal) => {
+  if (tanggal == null) {
+    return "00:00"
+  }
+  const hour = ('0' + tanggal.getHours()).slice(-2)
+  const minute = ('0' + (tanggal.getMinutes())).slice(-2)
+  return `${hour}:${minute}`
+})
+
 View.global('hari', (index) => {return hari[index]})

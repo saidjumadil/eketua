@@ -13,8 +13,7 @@ export default class UsersController {
 
     async post({request, response, session}){
         const post = request.all()
-        post['username'] = post.ktp
-        post['password'] = md5(post.ktp).toString()
+        post['password'] = md5(post.username).toString()
         console.log(post)
         const create = await User.create(post)
 

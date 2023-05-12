@@ -24,6 +24,9 @@ export default class Kegiatan extends BaseModel {
   public tanggal: Date
 
   @column()
+  public tanggal_akhir: Date
+
+  @column()
   public id_provinsi: number
 
   @column()
@@ -49,6 +52,9 @@ export default class Kegiatan extends BaseModel {
 
   @column()
   public gambar: string
+
+  @column()
+  public jumlah_peserta: number
 
   @column()
   public yt: string

@@ -140,10 +140,10 @@
       fetch(api)
         .then( res => res.json())
         .then(data => {
-          console.log(data)
-          data.jenis.forEach(e => {
-            e.y = Math.floor(Math.random() * 100)
-          })
+          // console.log(data)
+          // data.jenis.forEach(e => {
+          //   e.y = Math.floor(Math.random() * 100)
+          // })
           chart(data.jenis)
         })
       function chart(isi){

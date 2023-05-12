@@ -4,7 +4,7 @@ import Kecamatan from "App/Models/Daerah/Kecamatan";
 import Kota from "App/Models/Daerah/Kota";
 import Provinsi from "App/Models/Daerah/Provinsi";
 import Kegiatan from "App/Models/Kegiatan";
-import Application from '@ioc:Adonis/Core/Application';
+// import Application from '@ioc:Adonis/Core/Application';
 import JenisKegiatan from "App/Models/JenisKegiatan";
 
 export default class ApiController {
@@ -73,5 +73,28 @@ export default class ApiController {
             })
         }
         return {jenis : detail}
+    }
+
+    async tambah_galeri({request}){
+        const page = request.param('page')
+        const limit = 10
+
+        const posts = await Kegiatan.query().paginate(page, limit)
+        // console.log(posts.length)
+        // const galeri : any = await Kegiatan.query().limit(10).orderBy("tanggal", "desc")
+        let list_gambar : any = []
+        // let count = 0
+        for(let item of posts){
+            if(item.gambar != null){
+                const list = item.gambar.split(',')
+                for(let i of list){
+                    if (!(i == null || i == "")) {
+                        list_gambar.push(`${item.id}/${i}`)
+                        // count++
+                    }
+                }
+            }
+        }
+        return {galeri : list_gambar}
     }
 }

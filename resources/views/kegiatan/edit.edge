@@ -73,6 +73,26 @@
                   <div class="mb-3">
                     <label class="form-label" for="tanggal">Tanggal Kegiatan</label>
                     <input class="form-control digits" type="date" name="tanggal" id="tanggal" value={{tanggal(kegiatan.tanggal)}}>
+                    <div class="row">
+                      <div class="col col-sm-6">
+                        <label class="form-label" for="end">Waktu Mulai</label>
+                        <div class="input-group clockpicker">
+                          <input class="form-control" type="text" name="time" id="time" value="{{time(kegiatan.tanggal)}}"><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                        </div>
+                      </div>
+                      <div class="col col-sm-6">
+                        <label class="form-label" for="end">Waktu Akhir</label>
+                        <div class="input-group clockpicker">
+                          <input class="form-control" type="text" name="end" id="end" value="{{time(kegiatan.tanggal_akhir)}}"><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <div class="checkbox p-0">
+                        <input class="form-check-input" id="allday" name="allday" type="checkbox">
+                        <label class="form-check-label" for="allday">Sepanjang Hari</label>
+                      </div>
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="provinsi">Lokasi Kegiatan</label>
@@ -96,7 +116,11 @@
                     </div>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label" for="yt">Judul Kegiatan</label>
+                    <label class="form-label" for="jumlah_peserta">Jumlah Peserta</label>
+                    <input class="form-control digits" type="number" name="jumlah_peserta" id="jumlah_peserta" placeholder="Jumlah Peserta" value="{{kegiatan.jumlah_peserta}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="yt">Link Youtube</label>
                     <input class="form-control digits" type="text" name="yt" id="yt" placeholder="Link Youtube Video">
                     <p>*Tekan Spasi untuk menambahkan link Youtube</p>
                     <div id="youtube">
@@ -155,6 +179,23 @@
       const value_provinsi = `{{kegiatan.id_provinsi}}`
       const value_kota = `{{kegiatan.id_kota}}`
       const value_kecamatan = `{{kegiatan.id_kecamatan}}`
+      const checkbox = document.querySelector('#allday')
+      const time = document.querySelector('#time')
+      const end = document.querySelector('#end')
+      let timeEvent = time.value
+
+      checkbox.addEventListener('change', (event) => {
+        if (event.currentTarget.checked) {
+          timeEvent = time.value
+          time.value = "00:00"
+          end.value = "23:59"
+          time.disabled = true
+          end.disabled = true
+        } else {
+          time.disabled = false
+          end.disabled = false
+        }
+      })
       
       provinsiSet()
       kotaSet(value_provinsi, true)

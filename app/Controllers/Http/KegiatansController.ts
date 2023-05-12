@@ -2,7 +2,7 @@
 
 import JenisKegiatan from "App/Models/JenisKegiatan"
 import Kegiatan from "App/Models/Kegiatan"
-import Application from '@ioc:Adonis/Core/Application';
+// import Application from '@ioc:Adonis/Core/Application';
 
 export default class KegiatansController {
     async index({view}){
@@ -31,12 +31,19 @@ export default class KegiatansController {
 
         let list : any = []
 
-        for(let i of post.link_yt){
-            const link = i.split('=')
-            list.push(link[1].split('&')[0])
+        if (post.link_yt) {
+            for(let i of post.link_yt){
+                const link = i.split('=')
+                list.push(link[1].split('&')[0])
+            }
         }
 
         const jenis_detail : any = await JenisKegiatan.query().where('id', jenis[0]).first()
+        
+        if (post.allday) {
+            post.time = "00:00"
+            post.end = "23:59"
+        }
 
         const data : any = {
             id_kegiatan: jenis[0],
@@ -44,7 +51,8 @@ export default class KegiatansController {
             warna: jenis_detail.warna,
             judul: post.judul,
             deskripsi: post.kegiatan,
-            tanggal: post.tanggal,
+            tanggal: post.tanggal + " " + post.time,
+            tanggal_akhir: post.tanggal + " " + post.end,
             id_provinsi: provinsi[0],
             provinsi: provinsi[1],
             id_kota: kota[0],
@@ -52,6 +60,7 @@ export default class KegiatansController {
             id_kecamatan: kecamatan[0],
             kecamatan: kecamatan[1],
             alamat: post.alamat,
+            jumlah_peserta : post.jumlah_peserta,
             yt: list.toString(),
             link: post.link ? post.link.toString() : ''
           }
@@ -90,13 +99,19 @@ export default class KegiatansController {
 
         const jenis_detail : any = await JenisKegiatan.query().where('id', jenis[0]).first()
 
+        if (post.allday) {
+            post.time = "00:00"
+            post.end = "23:59"
+        } 
+
         const data : any = {
             id_kegiatan: jenis[0],
             jenis: jenis[1],
             warna: jenis_detail.warna,
             judul: post.judul,
             deskripsi: post.kegiatan,
-            tanggal: post.tanggal,
+            tanggal: post.tanggal + " " + post.time,
+            tanggal_akhir: post.tanggal + " " + post.end,
             id_provinsi: provinsi[0],
             provinsi: provinsi[1],
             id_kota: kota[0],
@@ -104,11 +119,12 @@ export default class KegiatansController {
             id_kecamatan: kecamatan[0],
             kecamatan: kecamatan[1],
             alamat: post.alamat,
+            jumlah_peserta : post.jumlah_peserta,
             yt: list.toString(),
             link: post.link ? post.link.toString() : ''
           }
 
-        console.log(data)
+        // return data
         const add = await Kegiatan.create(data)
         if (add) {
             session.flash('status', {type : 'success', message : 'Kegiatan Berhasil DiTambahkan'})

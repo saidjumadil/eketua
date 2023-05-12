@@ -3,6 +3,7 @@
   <head>
     @include('partials/head')
     <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/timepicker.css">
     <!-- Plugins css Ends-->
   </head>
   <body>
@@ -32,7 +33,7 @@
           <!-- Container-fluid starts-->
           {{--  @!component('partials/slide', {})  --}}
           
-          <div class="container-fluid dashboard-default-sec">
+          <div class="container-fluid dashboard-default-sec time-picker">
             <div class="col-sm-6">
               <h3>Tambah Kegiatan Ketua</h3>
               <ol class="breadcrumb">
@@ -69,6 +70,26 @@
                     <label class="form-label" for="tanggal">Tanggal Kegiatan</label>
                     <input class="form-control digits" type="date" name="tanggal" id="tanggal">
                   </div>
+                  <div class="row">
+                    <div class="col col-sm-6">
+                      <label class="form-label" for="time">Waktu Mulai</label>
+                      <div class="input-group clockpicker">
+                        <input class="form-control" type="text" name="time" id="time" value="00:00"><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                      </div>
+                    </div>
+                    <div class="col col-sm-6">
+                      <label class="form-label" for="end">Waktu Akhir</label>
+                      <div class="input-group clockpicker">
+                        <input class="form-control" type="text" name="end" id="end" value="00:00"><span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <div class="checkbox p-0">
+                      <input class="form-check-input" id="allday" name="allday" type="checkbox">
+                      <label class="form-check-label" for="allday">Sepanjang Hari</label>
+                    </div>
+                  </div>
                   <div class="mb-3">
                     <label class="form-label" for="provinsi">Lokasi Kegiatan</label>
                     <select class="form-select digits" name="provinsi" id="provinsi" required>
@@ -89,6 +110,10 @@
                     <div>
                       <textarea class="form-control" name="alamat" id="alamat" rows="2" placeholder="Alamat Rinci Kegiatan"></textarea>
                     </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="jumlah_peserta">Jumlah Peserta</label>
+                    <input class="form-control digits" type="number" name="jumlah_peserta" id="jumlah_peserta" placeholder="Jumlah Peserta">
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="yt">Link Youtube</label>
@@ -126,6 +151,21 @@
       const provinsi = document.querySelector('#provinsi')
       const kota = document.querySelector('#kota')
       const kecamatan = document.querySelector('#kecamatan')
+      const checkbox = document.querySelector('#allday')
+      const time = document.querySelector('#time')
+      const end = document.querySelector('#end')
+
+      checkbox.addEventListener('change', (event) => {
+        if (event.currentTarget.checked) {
+          time.value = "00:00"
+          end.value = "23:59"
+          time.disabled = true
+          end.disabled = true
+        } else {
+          time.disabled = false
+          end.disabled = false
+        }
+      })
 
       provinsiSet()
       
@@ -246,6 +286,9 @@
     <!-- latest jquery-->
     @include('partials/script')
     <!-- Plugins JS start-->
+    <script src="../assets/js/time-picker/jquery-clockpicker.min.js"></script>
+    <script src="../assets/js/time-picker/highlight.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/time-picker/clockpicker.js"></script>
     <!-- Plugins JS Ends-->
 
     <!-- Plugin used-->
