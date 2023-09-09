@@ -62,11 +62,13 @@
                             {{kegiatan.alamat}} - {{kegiatan.kecamatan}}, {{kegiatan.kota}}, {{kegiatan.provinsi}}
                           </li>
                         </ul>
-                        @each(item in kegiatan.deskripsi.split(/\r?\n/))
-                          @if(item != '')
-                            <p style="text-align: justify;">&ensp;&ensp;{{item}}</p>
-                          @endif
-                        @endeach
+                        @if(kegiatan.deskripsi != null)
+                          @each(item in kegiatan.deskripsi.split(/\r?\n/))
+                            @if(item != '')
+                              <p style="text-align: justify;">&ensp;&ensp;{{item}}</p>
+                            @endif
+                          @endeach
+                        @endif
                       </div>
                       @if(kegiatan.yt)
                         @each(yt in kegiatan.yt.split(','))
@@ -92,7 +94,7 @@
                 <div class="row mb-3">
                   <div class="col col-7 d-flex align-items-center">
                     <input type="hidden" name="id" id="id" value="{{kegiatan.id}}">
-                    <input type="file" id="gambar" class="form-control" accept="image/jpeg, image/png, image/jpg">
+                    <input type="file" id="gambar" class="form-control" accept="image/jpeg, image/png, image/jpg" multiple>
                   </div>
                   <div class="col col-3">
                     <button type="button" id="tambah" class="btn btn-primary btn-sm">Tambah</button>
@@ -204,8 +206,11 @@
         </div>`
         let post = new FormData()
         if (gambar.value != null) {
-          post.append('gambar', gambar.files[0])
+          for(let item of gambar.files){
+            post.append('gambar[]', item)
+          }
           post.append('id', id.value)
+          console.log(gambar.files)
           fetch(api, {method: 'POST', body: post})
             .then(res => res.json())
             .then(data => {

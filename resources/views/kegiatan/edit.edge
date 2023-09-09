@@ -3,6 +3,7 @@
   <head>
     @include('partials/head')
     <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{appUrl()}}/assets/css/timepicker.css">
     <!-- Plugins css Ends-->
   </head>
   <body>
@@ -68,7 +69,11 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="kegiatan">Isi Kegiatan</label>
-                    <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting">{{kegiatan.deskripsi}}</textarea>
+                    @if(kegiatan.deskripsi == null && kegiatan.deskripsi == '')
+                      <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting"></textarea>
+                    @else
+                      <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting">{{kegiatan.deskripsi}}</textarea>
+                    @endif
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="tanggal">Tanggal Kegiatan</label>
@@ -332,7 +337,9 @@
     @include('partials/script')
     <!-- Plugins JS start-->
     <!-- Plugins JS Ends-->
-
+    <script src="{{appUrl()}}/assets/js/time-picker/jquery-clockpicker.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/time-picker/highlight.min.js"></script>
+    <script src="{{appUrl()}}/assets/js/time-picker/clockpicker.js"></script>
     <!-- Plugin used-->
   </body>
 </html>

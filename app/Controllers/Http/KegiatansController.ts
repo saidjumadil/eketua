@@ -6,7 +6,7 @@ import Kegiatan from "App/Models/Kegiatan"
 
 export default class KegiatansController {
     async index({view}){
-        const kegiatan = await Kegiatan.query().whereRaw('MONTH(tanggal) = ?', [new Date().getMonth() + 1]).andWhereRaw('YEAR(tanggal) = ?', [new Date().getFullYear()])
+        const kegiatan = await Kegiatan.query().whereRaw('MONTH(tanggal) = ?', [new Date().getMonth() + 1]).andWhereRaw('YEAR(tanggal) = ?', [new Date().getFullYear()]).orderBy('tanggal', 'asc')
         return view.render('kegiatan/index', {kegiatan})
     }
 

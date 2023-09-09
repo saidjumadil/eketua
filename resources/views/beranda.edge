@@ -93,10 +93,12 @@
                               gambar: `${appUrl()}/assets/images/banner.jpg`
                             })
                             @each(item in kegiatan)
+                              @set('deskripsi', item.deskripsi ? item.deskripsi.slice(0,50) : "")
                               @!component('component/beranda/kegiatan', {
                                 id_kegiatan : item.id,
                                 judul: item.judul,
-                                ringkasan: `${item.deskripsi.slice(0,50)}...`,
+                                // ringkasan: `${item.deskripsi.slice(0,50)}...`,
+                                ringkasan: deskripsi,
                                 gambar: item.gambar ? appUrl(`uploads/images/${item.id}/${item.gambar.split(',')[0]}`) : `${appUrl()}/assets/images/banner.jpg`
                               })
                             @endeach

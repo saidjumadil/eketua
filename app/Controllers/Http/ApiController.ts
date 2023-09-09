@@ -24,29 +24,30 @@ export default class ApiController {
 
     async kegiatan({request}){
         const {bulan, tahun} = request.all()
-        return await Kegiatan.query().whereRaw('MONTH(tanggal) = ?', [parseInt(bulan) + 1]).andWhereRaw('YEAR(tanggal) = ?', [tahun])
+        return await Kegiatan.query().whereRaw('MONTH(tanggal) = ?', [parseInt(bulan) + 1]).andWhereRaw('YEAR(tanggal) = ?', [tahun]).orderBy('tanggal', 'asc')
     }
 
     async gambar({request}){
         try {
             const {id} = request.all()
+            // console.log(request.file('gambar'))
             const kegiatan : any = await Kegiatan.query().where('id', id).first()
-            const gambar = request.file('gambar', {
-                size: '2mb',
-                extnames: ['jpg', 'png'],
-            })
             let file : any = []
-            
             if (kegiatan.gambar) {
                 file  = kegiatan.gambar.split(',')
             }
+            
+            const gambar = request.files('gambar')
+            for(let item of gambar){
+                //simpan gambar
+                // await gambar.moveToDisk(`images/${id}/`)
+                file.push(item.fileName)
+            }
+            
 
-            //simpan gambar
-            await gambar.moveToDisk(`images/${id}/`)
-            file.push(gambar.fileName)
-            console.log(file.toString())
-            await Kegiatan.query().where('id', id).update({gambar : file.toString()})
-            return {status : true, message : 'Berhasil menambahkan gambar', fig: gambar.fileName}
+            // console.log(file.toString())
+            // await Kegiatan.query().where('id', id).update({gambar : file.toString()})
+            return {status : true, message : 'Berhasil menambahkan gambar', fig: file}
         } catch (error) {
             console.log(error)
             return {status : false, message : 'Gagal menambahkan gambar'}
