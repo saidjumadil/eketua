@@ -69,7 +69,7 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="kegiatan">Isi Kegiatan</label>
-                    @if(kegiatan.deskripsi == null && kegiatan.deskripsi == '')
+                    @if(kegiatan.deskripsi == null || kegiatan.deskripsi == '')
                       <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting"></textarea>
                     @else
                       <textarea class="form-control" name="kegiatan" id="kegiatan" rows="5" placeholder="Hasil dan Catatan Penting">{{kegiatan.deskripsi}}</textarea>
